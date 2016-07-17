@@ -1,0 +1,71 @@
+require 'rubygems'
+require 'sqlite3'
+require 'mysql2'
+
+
+# Download and extract the following dumps into this directory:
+WIKIDUMPS      = ENV['WIKIDUMPS']
+LANGLINKS_FILE = Dir.glob("#{WIKIDUMPS}/enwiki-????????-langlinks.sql").first
+ENWIKI_FILE    = Dir.glob("#{WIKIDUMPS}/enwiki-????????-pages-*-*.xml").first
+ZHWIKI_FILE    = Dir.glob("#{WIKIDUMPS}/zhwiki-????????-pages-*-*.xml").first
+
+# 'zh' is "Chinese" in general - the name from Wikipedia if there are no separate names for tw/hk/cn
+# 'cn' is the PRC
+CHINESE_VARIANTS = %w(cn tw hk)
+LANGUAGES = %w(en de fr ru ja zh) + CHINESE_VARIANTS
+LINKS = %w(wikipedia imdb)
+
+
+# Comparison for movie names used throughout the process
+def almost_equal a, b
+  a = a.gsub(/[ ,.\-–—!?]/, '').downcase if a
+  b = b.gsub(/[ ,.\-–—!?]/, '').downcase if b
+  a == b
+end
+
+
+require_relative 'extract_movies'
+require_relative 'english'
+require_relative 'international'
+require_relative 'chinese'
+require_relative 'suggestion'
+require_relative 'fts'
+
+
+def sqlite_cli(command, output = nil)
+  system "/usr/local/opt/sqlite/bin/sqlite3 Movies.db -csv -header #{Shellwords.escape command} #{output}"
+end
+
+
+task :database do
+  $db ||= SQLite3::Database.new('Movies.db')
+end
+
+task :close_database do
+  $db.close if $db
+  $db = nil
+end
+
+task :delete_database => :close_database do
+  rm 'Movies.db' rescue nil
+end
+
+desc "Vacuums the database file (Movies.db)"
+task :vacuum => :database do
+  $db.execute "VACUUM"
+end
+
+desc "Exports a diff-able list of movies included in the app"
+task :export_list => :close_database do
+  sqlite_cli "SELECT id, en, wikipedia FROM movies", "> Movies.csv"
+end
+
+desc "Runs the full pipeline, up to the finished Movies.db file"
+task :default => [:extract_english_movies,
+                  :create_english_database,
+                  :add_translations,
+                  :add_chinese_variants,
+                  :fill_suggestion_column,
+                  :'fts:all',
+                  :export_list,
+                  :vacuum]
