@@ -1,0 +1,16 @@
+devices([
+  "iPhone 6",
+  "iPhone 6 Plus",
+  "iPhone 5",
+  "iPhone 4s"
+])
+
+ios_version '8.1'
+
+languages([
+  'en-US'
+])
+
+screenshots_path "."
+
+project_path '../MovieDict.xcodeproj'

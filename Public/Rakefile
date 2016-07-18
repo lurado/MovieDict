@@ -1,0 +1,20 @@
+# Requires the 'snapshot' gem and ImageMagick from Homebrew.
+
+task :screenshots do
+  sh "snapshot"
+  sh "rm screenshots.html"
+  
+  Dir.glob('*-*').each do |language|
+    next unless File.directory? language
+    
+    # I don't have overlay images for the Chinese handwriting IME on the iPhone 6.
+    sh "rm '#{language}/#{language}-iPhone6-portrait-3-Fireflies.png'"
+    
+    # Overlay a couple of fake "IME in progress" images onto the screenshots.
+    { '4' => '4+5', '5' => '4+5', '6Plus' => '6Plus' }.each do |model, size|
+      inout_filenames = " '#{language}/#{language}-iPhone#{model}-portrait-3-Fireflies.png'" * 2
+      sh "composite -compose atop -gravity northwest Snapshot-Overlay-Top-iPhone#{size}.png #{inout_filenames}"
+      sh "composite -compose atop -gravity southwest Snapshot-Overlay-Bottom-iPhone#{size}.png #{inout_filenames}"
+    end
+  end
+end
