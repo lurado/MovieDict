@@ -94,14 +94,14 @@ MovieRegion const kMovieRegionHongKong = @"hk";
             escapedString = [escapedString stringByReplacingOccurrencesOfString:@"*" withString:@"**"];
             
             NSString *innerSQL = [NSString stringWithFormat:@"SELECT docid FROM fts_%@ WHERE %@ MATCH '\"%@*\"'", region, region, escapedString];
-            NSString *SQL = [NSString stringWithFormat:@"SELECT * FROM movies WHERE id in (%@) ORDER BY LENGTH(%@) LIMIT (?)", innerSQL, region];
+            NSString *SQL = [NSString stringWithFormat:@"SELECT * FROM movies WHERE id in (%@) ORDER BY LENGTH(%@) ASC, year DESC LIMIT (?)", innerSQL, region];
             s = [db executeQuery:SQL, @(limit + 1)];
         }
         else {
             NSString *escapedString = string;
             escapedString = [escapedString stringByReplacingOccurrencesOfString:@"%" withString:@"%%"];
             
-            NSString *SQL = [NSString stringWithFormat:@"SELECT * FROM movies WHERE %@ LIKE (?) ORDER BY LENGTH(%@) ASC LIMIT (?)", region, region];
+            NSString *SQL = [NSString stringWithFormat:@"SELECT * FROM movies WHERE %@ LIKE (?) ORDER BY LENGTH(%@) ASC, year DESC LIMIT (?)", region, region];
             NSString *searchPattern = [NSString stringWithFormat:@"%%%@%%", escapedString];
             s = [db executeQuery:SQL, searchPattern, @(limit + 1)];
         }
