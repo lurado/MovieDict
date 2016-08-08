@@ -22,6 +22,10 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>see Run Script build phase</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>plecoapi</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
