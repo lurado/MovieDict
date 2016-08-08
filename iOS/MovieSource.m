@@ -85,6 +85,16 @@ NSUInteger const kRegionShowMoreLimit = 250;
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if ([self tableView:tableView titleForHeaderInSection:section]) {
+        return 20.0;
+    }
+    else {
+        return 0.0;
+    }
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (self.results == nil || self.results[section].movies.count == 0) {
