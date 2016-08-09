@@ -13,7 +13,7 @@ task :extract_english_movies => 'extract_movies.bin' do
   sh "./extract_movies.bin '#{ENWIKI_FILE}' 'enwiki'"
 end
 
-desc "Extracts all Chinese pages about movies into ./enwiki as plain text files"
+desc "Extracts all Chinese pages about movies into ./zhwiki as plain text files"
 task :extract_chinese_movies => 'extract_movies.bin' do
   mkdir_p 'zhwiki'
   rm_rf 'zhwiki/*.txt'

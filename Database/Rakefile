@@ -64,6 +64,7 @@ desc "Runs the full pipeline, up to the finished Movies.db file"
 task :default => [:extract_english_movies,
                   :create_english_database,
                   :add_translations,
+                  :extract_chinese_movies,
                   :add_chinese_variants,
                   :fill_suggestion_column,
                   :'fts:all',
