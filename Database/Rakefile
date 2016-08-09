@@ -18,8 +18,8 @@ LINKS = %w(wikipedia imdb)
 
 # Comparison for movie names used throughout the process
 def almost_equal a, b
-  a = a.gsub(/[ ,.\-–—!?]/, '').downcase if a
-  b = b.gsub(/[ ,.\-–—!?]/, '').downcase if b
+  a = a.gsub(/[[:punct:],[:space:]]/, '').downcase if a
+  b = b.gsub(/[[:punct:],[:space:]]/, '').downcase if b
   a == b
 end
 
