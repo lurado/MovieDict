@@ -31,7 +31,7 @@ task :create_english_database => [:delete_database, :database] do
         end
         
         # Skip lists, print media etc.
-        if en =~ /^List of/i or en =~ /(comics|cartoons|novel(la)?|book|story|show|drama|opera|video|series|serial|program(me)?|TV special|episode|director|actor|character|play|song|album|soundtrack|franchise|manga|franchise|live|musical|game|pinball|studio|company|golfer|Oni Press)\)$/i
+        if en =~ /^List(s)? of/i or en =~ / films$/ or en =~ /(comics|cartoons|novel(la)?|book|story|show|drama|opera|video|series|serial|program(me)?|TV special|episode|director|actor|character|play|song|album|soundtrack|franchise|manga|franchise|live|musical|game|pinball|studio|company|golfer|Oni Press)\)$/i
           puts "Skipping #{wikipedia_link}"
           throw :not_a_movie
         end
