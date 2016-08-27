@@ -41,7 +41,7 @@
 
 - (void)loadView
 {
-    self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    self.view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
     
     self.tableView = [self createTableView];
     self.suggestionsView = [self createSuggestionsView];
@@ -115,7 +115,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSIndexPath *selection = [self.tableView indexPathForSelectedRow];
+    NSIndexPath *selection = self.tableView.indexPathForSelectedRow;
     if (selection && [UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad) {
         [self.tableView deselectRowAtIndexPath:selection animated:animated];
     }
@@ -126,7 +126,7 @@
     [super viewDidAppear:animated];
     
     // Automatically focus the search bar on app launch.
-    if (self.tableView.numberOfSections == 0) {
+    if (! animated) {
         [self.searchBar becomeFirstResponder];
     }
 }
@@ -154,7 +154,7 @@
 
 #pragma mark - MovieSourceDelegate
 
-- (void)movieSource:(MovieSource *)movieSource resultsHaveChanged:(BOOL)haveResults;
+- (void)movieSource:(MovieSource *)movieSource resultsHaveChanged:(BOOL)haveResults
 {
     [self.tableView reloadData];
     [self.tableView scrollRectToVisible:CGRectMake(0, 0, 10, 10) animated:NO];
