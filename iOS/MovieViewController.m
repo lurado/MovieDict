@@ -20,6 +20,7 @@ static CGFloat const kPlecoButtonOffset = 2;
 
 @interface MovieViewController ()
 
+@property (nonatomic) CGFloat lastWidth;
 @property (nonatomic) UIPopoverController *masterPopoverController;
 
 @end
@@ -102,13 +103,21 @@ static CGFloat const kPlecoButtonOffset = 2;
 
 - (void)viewWillLayoutSubviews
 {
+    [super viewWillLayoutSubviews];
+    
+    if (self.view.bounds.size.width == self.lastWidth) {
+        return;
+    }
+    
+    self.lastWidth = self.view.bounds.size.width;
+    
+    // Recreate all subviews every time the layout changes.
+    // This the easiest way to deal with re-flowing text (multi-length translations) without AutoLayout.
+    
     for (UIView *view in self.view.subviews) {
         [view removeFromSuperview];
     }
-}
 
-- (void)viewDidLayoutSubviews
-{
     UIView *bottomView = nil;
     
     for (MovieRegion region in [Movie allRegions]) {
