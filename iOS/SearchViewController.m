@@ -131,6 +131,13 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.view endEditing:YES];
+}
+
 - (void)adjustInsets:(NSNotification *)notification
 {
     UIEdgeInsets insets = UIEdgeInsetsMake(self.searchBar.frame.size.height, 0, 0, 0);
