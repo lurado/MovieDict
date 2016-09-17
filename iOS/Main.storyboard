@@ -154,28 +154,55 @@
                                             <frame key="frameInset" width="375" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Region" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qH-nC-ufP">
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Translation that might be very long and need line-breaks" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4YK-1g-CeM">
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aCl-kD-uXE">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Region" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qH-nC-ufP">
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.transform.translation.y">
+                                                                    <integer key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Translation that might be very long and need line-breaks" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4YK-1g-CeM">
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.transform.translation.y">
+                                                                    <integer key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FgZ-Va-NBw">
+                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="27" id="Cze-dT-mTv"/>
+                                                                <constraint firstAttribute="height" constant="27" id="GBe-Y7-1tH"/>
+                                                            </constraints>
+                                                            <state key="normal" title="魚"/>
+                                                            <connections>
+                                                                <action selector="openInPleco:" destination="iLk-8f-kk5" eventType="touchUpInside" id="YPG-lt-A9i"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="6qH-nC-ufP" firstAttribute="width" secondItem="aCl-kD-uXE" secondAttribute="width" multiplier="0.3" id="Wf0-mP-eg8"/>
+                                                        <constraint firstItem="6qH-nC-ufP" firstAttribute="top" secondItem="FgZ-Va-NBw" secondAttribute="top" id="tLu-Ff-hSm"/>
+                                                    </constraints>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="4YK-1g-CeM" secondAttribute="trailing" id="3aZ-Jw-hKX"/>
-                                                <constraint firstItem="6qH-nC-ufP" firstAttribute="leading" secondItem="Vrf-vV-zoj" secondAttribute="leadingMargin" id="D02-Yl-sqI"/>
-                                                <constraint firstAttribute="bottom" secondItem="4YK-1g-CeM" secondAttribute="bottom" constant="40" id="HSS-Yn-h6n"/>
-                                                <constraint firstItem="4YK-1g-CeM" firstAttribute="top" secondItem="Vrf-vV-zoj" secondAttribute="top" id="S5l-ZH-CtO"/>
-                                                <constraint firstItem="4YK-1g-CeM" firstAttribute="leading" secondItem="6qH-nC-ufP" secondAttribute="trailing" constant="20" id="nQd-d6-1lm"/>
-                                                <constraint firstItem="6qH-nC-ufP" firstAttribute="width" secondItem="Vrf-vV-zoj" secondAttribute="width" multiplier="0.3" id="rZF-v7-Usc"/>
-                                                <constraint firstItem="4YK-1g-CeM" firstAttribute="top" secondItem="6qH-nC-ufP" secondAttribute="top" id="xgG-Cx-WJ5"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="aCl-kD-uXE" secondAttribute="leading" id="5mv-Oe-tp8"/>
+                                                <constraint firstAttribute="trailing" secondItem="aCl-kD-uXE" secondAttribute="trailing" constant="20" id="C5B-vG-YUJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="aCl-kD-uXE" secondAttribute="bottom" constant="40" id="D38-S1-o7Z"/>
+                                                <constraint firstItem="aCl-kD-uXE" firstAttribute="top" secondItem="Vrf-vV-zoj" secondAttribute="top" id="JeK-2G-XWL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="plecoButton" destination="FgZ-Va-NBw" id="bzD-hT-zM4"/>
                                             <outlet property="regionLabel" destination="6qH-nC-ufP" id="B6L-zI-D2K"/>
                                             <outlet property="titleLabel" destination="4YK-1g-CeM" id="u3o-O6-TO1"/>
                                         </connections>
@@ -243,6 +270,6 @@
         <image name="Wikipedia" width="92" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MCE-5j-X6o"/>
+        <segue reference="Tll-UG-LXB"/>
     </inferredMetricsTieBreakers>
 </document>

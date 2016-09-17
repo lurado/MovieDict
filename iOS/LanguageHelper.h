@@ -12,7 +12,7 @@
 
 @interface LanguageHelper : NSObject
 
-+ (UIView *)plecoButtonOrNilForTitle:(NSString *)title region:(MovieRegion)region;
++ (BOOL)isChineseTitle:(NSString *)title region:(MovieRegion)region;
 + (NSString *)romanizationForTitle:(NSString *)title region:(MovieRegion)region;
 
 @end

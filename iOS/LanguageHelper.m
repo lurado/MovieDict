@@ -8,18 +8,6 @@
 
 #import "LanguageHelper.h"
 #import "Movie.h"
-#import "Branding.h"
-
-
-static NSString *const kOpenInPleco = @"魚";
-
-
-@interface NSString (MovieDictHacks)
-
-- (NSURL *)URLToOpenInPleco;
-- (void)openInPleco:(id)sender;
-
-@end
 
 
 @implementation LanguageHelper
@@ -61,45 +49,6 @@ static NSString *const kOpenInPleco = @"魚";
         [title rangeOfCharacterFromSet:[self chineseCharacters]].length > 0;
 }
 
-+ (UIImage *)plecoButtonBackgroundImage
-{
-    static UIImage *image;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        CGSize const size = CGSizeMake(27, 27);
-        UIGraphicsBeginImageContextWithOptions(size, NO, 0);
-        UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:(CGRect){ CGPointZero, size }];
-        UIColor *movieDictColor = [Branding movieDictColor];
-        [movieDictColor setFill];
-        [path fill];
-        image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-    });
-    return image;
-}
-
-+ (UIView *)plecoButtonOrNilForTitle:(NSString *)title region:(MovieRegion)region
-{
-    if (! [self isChineseTitle:title region:region]) {
-        return nil;
-    }
-    
-    if (! [[UIApplication sharedApplication] canOpenURL:[title URLToOpenInPleco]]) {
-        return nil;
-    }
-    
-    UIImage *backgroundImage = [self plecoButtonBackgroundImage];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    [button setBackgroundImage:backgroundImage forState:UIControlStateNormal];
-    button.frame = (CGRect){ CGPointZero, backgroundImage.size };
-    button.tintColor = [UIColor whiteColor];
-
-    [button setTitle:kOpenInPleco forState:UIControlStateNormal];
-    [button addTarget:title action:@selector(openInPleco:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return button;
-}
-
 + (NSString *)romanizationForTitle:(NSString *)title region:(MovieRegion)region
 {
     // Do not romanise Hong Kong titles; they're Cantonese
@@ -114,22 +63,6 @@ static NSString *const kOpenInPleco = @"魚";
     else {
         return nil;
     }
-}
-
-@end
-
-
-@implementation NSString (MovieDictHacks)
-
-- (NSURL *)URLToOpenInPleco
-{
-    NSString *escapedSelf = [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    return [NSURL URLWithString:[NSString stringWithFormat:@"plecoapi://x-callback-url/s?q=%@&x-source=MovieDict", escapedSelf]];
-}
-
-- (void)openInPleco:(id)sender
-{
-    [[UIApplication sharedApplication] openURL:[self URLToOpenInPleco]];
 }
 
 @end
