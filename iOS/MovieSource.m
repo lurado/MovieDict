@@ -34,9 +34,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
 {
     if (self = [super init]) {
         self.searchQueue = [NSOperationQueue new];
-        if ([self.searchQueue respondsToSelector:@selector(qualityOfService)]) {
-            self.searchQueue.qualityOfService = NSOperationQualityOfServiceUserInitiated;
-        }
+        self.searchQueue.qualityOfService = NSOperationQualityOfServiceUserInitiated;
     }
     return self;
 }
@@ -123,9 +121,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
     label.text = title;
     label.textColor = [UIColor whiteColor];
     label.backgroundColor = [UIColor clearColor];
-    if ([[UIFont class] respondsToSelector:@selector(preferredFontForTextStyle:)]) {
-        label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-    }
+    label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     [label sizeToFit];
     
     UIView *container = [[UIView alloc] initWithFrame:CGRectInset(label.frame, -8, 0)];

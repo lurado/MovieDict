@@ -23,18 +23,12 @@
 
 + (void)applyBranding:(UIWindow *)window
 {
-    if ([window respondsToSelector:@selector(setTintColor:)]) {
-        window.tintColor = [self movieDictColor];
-        
-        [UINavigationBar appearance].tintColor = [UIColor whiteColor];
-        [UINavigationBar appearance].barTintColor = [self movieDictColor];
-        [UINavigationBar appearance].titleTextAttributes = @{ UITextAttributeTextColor: [UIColor whiteColor] };
-        [UINavigationBar appearance].barStyle = UIBarStyleBlackOpaque;
-    }
-    else {
-        [UINavigationBar appearance].titleTextAttributes = @{ UITextAttributeTextColor: [UIColor whiteColor] };
-        [UINavigationBar appearance].tintColor = [self movieDictColor];
-    }
+    window.tintColor = [self movieDictColor];
+    
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+    [UINavigationBar appearance].barTintColor = [self movieDictColor];
+    [UINavigationBar appearance].titleTextAttributes = @{ NSForegroundColorAttributeName: [UIColor whiteColor] };
+    [UINavigationBar appearance].barStyle = UIBarStyleBlackOpaque;
 }
 
 @end

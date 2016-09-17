@@ -31,17 +31,15 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
-            self.edgesForExtendedLayout = UIRectEdgeNone;
-            self.automaticallyAdjustsScrollViewInsets = NO;
-        }
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     return self;
 }
 
 - (void)loadView
 {
-    self.view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
+    self.view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     self.tableView = [self createTableView];
     self.suggestionsView = [self createSuggestionsView];
@@ -107,8 +105,6 @@
                                              selector:@selector(adjustInsets:)
                                                  name:UIKeyboardWillChangeFrameNotification
                                                object:nil];
-    // We don't remove ourselves from the defaultCenter in [dealloc]:
-    // It's not necessary on iOS 9+, and -[UIViewController dealloc] implicitly did it in iOS 5-8.
 }
 
 - (void)viewWillAppear:(BOOL)animated

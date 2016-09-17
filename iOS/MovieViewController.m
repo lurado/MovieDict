@@ -45,10 +45,8 @@ static CGFloat const kPlecoButtonOffset = 2;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
-            self.edgesForExtendedLayout = UIRectEdgeNone;
-            self.automaticallyAdjustsScrollViewInsets = NO;
-        }
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     return self;
 }
@@ -65,16 +63,7 @@ static CGFloat const kPlecoButtonOffset = 2;
     
     self.title = @"What do they call it?";
     
-    if (&UIContentSizeCategoryDidChangeNotification) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contentSizeCategoryDidChange:) name:UIContentSizeCategoryDidChangeNotification object:nil];
-    }
-}
-
-- (void)dealloc
-{
-    if (&UIContentSizeCategoryDidChangeNotification) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contentSizeCategoryDidChange:) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 #pragma mark - Split view
@@ -142,9 +131,7 @@ static CGFloat const kPlecoButtonOffset = 2;
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.text = [[string componentsSeparatedByString:@"/"] firstObject];
-    if ([UIFont respondsToSelector:@selector(preferredFontForTextStyle:)]) {
-        label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    }
+    label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     label.adjustsFontSizeToFitWidth = YES;
     label.textColor = [Branding movieDictColor];
     [label sizeToFit];
@@ -176,9 +163,7 @@ static CGFloat const kPlecoButtonOffset = 2;
     
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = romanization.length ? [NSString stringWithFormat:@"%@\n%@", title, romanization] : title;
-    if ([[UIFont class] respondsToSelector:@selector(preferredFontForTextStyle:)]) {
-        label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    }
+    label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     label.numberOfLines = 0;
     label.lineBreakMode = NSLineBreakByWordWrapping;
     [label sizeToFit];

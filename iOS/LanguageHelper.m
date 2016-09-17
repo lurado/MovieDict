@@ -92,13 +92,7 @@ static NSString *const kOpenInPleco = @"魚";
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     [button setBackgroundImage:backgroundImage forState:UIControlStateNormal];
     button.frame = (CGRect){ CGPointZero, backgroundImage.size };
-
-    if ([button respondsToSelector:@selector(tintColor)]) {
-        button.tintColor = [UIColor whiteColor];
-    }
-    else {
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
+    button.tintColor = [UIColor whiteColor];
 
     [button setTitle:kOpenInPleco forState:UIControlStateNormal];
     [button addTarget:title action:@selector(openInPleco:) forControlEvents:UIControlEventTouchUpInside];
@@ -129,7 +123,7 @@ static NSString *const kOpenInPleco = @"魚";
 
 - (NSURL *)URLToOpenInPleco
 {
-    NSString *escapedSelf = [self stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *escapedSelf = [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     return [NSURL URLWithString:[NSString stringWithFormat:@"plecoapi://x-callback-url/s?q=%@&x-source=MovieDict", escapedSelf]];
 }
 
