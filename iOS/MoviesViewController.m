@@ -29,6 +29,20 @@
     [self.tableView reloadData];
 }
 
+#pragma mark - UIViewController
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqual:@"showMovie"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        MovieViewController *destination = (id)navigationController.topViewController;
+        destination.movie = sender;
+    }
+    else {
+        [super prepareForSegue:segue sender:sender];
+    }
+}
+
 #pragma mark - MovieSourceDelegate
 
 - (void)movieSource:(MovieSource *)movieSource resultsHaveChanged:(BOOL)haveResults
@@ -38,9 +52,7 @@
 
 - (void)movieSource:(MovieSource *)movieSource didSelectMovie:(Movie *)movie
 {
-    MovieViewController *destination = [[MovieViewController alloc] initWithNibName:nil bundle:nil];
-    destination.movie = movie;
-    [self.navigationController pushViewController:destination animated:YES];
+    [self performSegueWithIdentifier:@"showMovie" sender:movie];
 }
 
 @end

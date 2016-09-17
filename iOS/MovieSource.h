@@ -15,7 +15,7 @@
 
 @interface MovieSource : NSObject <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
-@property (nonatomic, weak) id<MovieSourceDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<MovieSourceDelegate> delegate;
 
 @property (nonatomic, readonly) MovieRegion region;
 

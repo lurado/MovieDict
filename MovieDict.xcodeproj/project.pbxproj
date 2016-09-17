@@ -33,6 +33,8 @@
 		D4E5B91717E85B4400C77D46 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E5B91617E85B4400C77D46 /* SearchViewController.m */; };
 		D4E5B91A17E85B4400C77D46 /* MovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E5B91917E85B4400C77D46 /* MovieViewController.m */; };
 		D4E5B91C17E85B4400C77D46 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E5B91B17E85B4400C77D46 /* Images.xcassets */; };
+		D4FA62011D8D66580071B81B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4FA62001D8D66580071B81B /* Main.storyboard */; };
+		D4FA62041D8D85FD0071B81B /* TranslationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4FA62031D8D85FD0071B81B /* TranslationCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +85,9 @@
 		D4E5B91817E85B4400C77D46 /* MovieViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MovieViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		D4E5B91917E85B4400C77D46 /* MovieViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieViewController.m; sourceTree = "<group>"; };
 		D4E5B91B17E85B4400C77D46 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D4FA62001D8D66580071B81B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		D4FA62021D8D85FD0071B81B /* TranslationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslationCell.h; sourceTree = "<group>"; };
+		D4FA62031D8D85FD0071B81B /* TranslationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranslationCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,10 +162,13 @@
 			children = (
 				D4C6C5C91D327734008CE482 /* Branding.h */,
 				D4C6C5CA1D327734008CE482 /* Branding.m */,
+				D4FA62001D8D66580071B81B /* Main.storyboard */,
 				D4C6C5CC1D328450008CE482 /* SuggestionsButton.h */,
 				D4C6C5CD1D328450008CE482 /* SuggestionsButton.m */,
 				D4362DA71A4AEC2B00988604 /* SuggestionsView.h */,
 				D4362DA81A4AEC2B00988604 /* SuggestionsView.m */,
+				D4FA62021D8D85FD0071B81B /* TranslationCell.h */,
+				D4FA62031D8D85FD0071B81B /* TranslationCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -294,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4C865451A311763002891DB /* Movies.db in Resources */,
+				D4FA62011D8D66580071B81B /* Main.storyboard in Resources */,
 				D4E5B91C17E85B4400C77D46 /* Images.xcassets in Resources */,
 				D4362DA01A4AD9D100988604 /* LaunchScreen.storyboard in Resources */,
 				D4E5B90817E85B4400C77D46 /* InfoPlist.strings in Resources */,
@@ -330,6 +339,7 @@
 				D40838D21A4798F8004BE0D9 /* FMDatabase.m in Sources */,
 				D4C6C5CE1D328450008CE482 /* SuggestionsButton.m in Sources */,
 				D479D2AC1B1B19A000F67DEF /* FindMoviesOperation.m in Sources */,
+				D4FA62041D8D85FD0071B81B /* TranslationCell.m in Sources */,
 				D40838D41A4798F8004BE0D9 /* FMDatabasePool.m in Sources */,
 				D40838D51A4798F8004BE0D9 /* FMDatabaseQueue.m in Sources */,
 				D41A6D3F1D3BD3E500A5680C /* MovieResults.m in Sources */,
@@ -453,6 +463,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/iOS/MovieDict-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = info.movieglot.Movieglot;
 				PRODUCT_NAME = MovieDict;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -469,6 +480,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/iOS/MovieDict-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = info.movieglot.Movieglot;
 				PRODUCT_NAME = MovieDict;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

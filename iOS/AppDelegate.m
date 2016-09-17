@@ -7,24 +7,45 @@
 //
 
 #import "AppDelegate.h"
-#import "SearchViewController.h"
 #import "Branding.h"
+#import "MovieViewController.h"
+
+
+@interface AppDelegate () <UISplitViewControllerDelegate>
+
+@end
 
 
 @implementation AppDelegate
 
+#pragma mark - UIApplicationDelegate
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
-    SearchViewController *viewController = [[SearchViewController alloc] initWithNibName:nil bundle:nil];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    
     [Branding applyBranding:self.window];
-    
-    [self.window makeKeyAndVisible];
+
+    UISplitViewController *splitViewController = (id)self.window.rootViewController;
+    splitViewController.delegate = self;
+    splitViewController.maximumPrimaryColumnWidth = 400;
+    splitViewController.preferredPrimaryColumnWidthFraction = 0.5;
+    splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
     
     return YES;
+}
+
+#pragma mark - UISplitViewControllerDelegate
+
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController
+{
+    NSParameterAssert([secondaryViewController isKindOfClass:[UINavigationController class]]);
+    
+    UINavigationController *navigationController = (id)secondaryViewController;
+    if ([navigationController.topViewController isKindOfClass:[MovieViewController class]]) {
+        // If the MovieViewController does not show a movie, then do discard it while collapsing. 
+        return ((MovieViewController *)navigationController.topViewController).movie == nil;
+    }
+    
+    return NO;
 }
 
 @end

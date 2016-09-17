@@ -13,13 +13,12 @@
 #import "SuggestionsView.h"
 
 
-@interface SearchViewController () <UITableViewDelegate, MovieSourceDelegate, SuggestionsViewDelegate>
+@interface SearchViewController () <MovieSourceDelegate, SuggestionsViewDelegate>
 
-@property (nonatomic, strong) MovieSource *movieSource;
-
-@property (nonatomic, weak) UISearchBar *searchBar;
-@property (nonatomic, weak) UITableView *tableView;
-@property (nonatomic, weak) SuggestionsView *suggestionsView;
+@property (strong, nonatomic) IBOutlet MovieSource *movieSource;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet SuggestionsView *suggestionsView;
 
 @end
 
@@ -28,71 +27,10 @@
 
 #pragma mark - UIViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    return self;
-}
-
-- (void)loadView
-{
-    self.view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
-    self.tableView = [self createTableView];
-    self.suggestionsView = [self createSuggestionsView];
-    self.searchBar = [self createSearchBar];
-    
-    [self adjustInsets:nil];
-}
-
-- (UITableView *)createTableView
-{
-    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
-    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:tableView];
-    if ([tableView respondsToSelector:@selector(keyboardDismissMode)]) {
-        tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-    }
-    return tableView;
-}
-
-- (SuggestionsView *)createSuggestionsView
-{
-    SuggestionsView *suggestionsView = [[SuggestionsView alloc] initWithFrame:self.view.bounds];
-    suggestionsView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:suggestionsView];
-    return suggestionsView;
-}
-
-- (UISearchBar *)createSearchBar
-{
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
-    [self.view addSubview:searchBar];
-    [searchBar sizeToFit];
-    return searchBar;
-}
-
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
-    self.searchBar.placeholder = @"Search for movie titles in any language";
-    self.navigationItem.title = @"MovieDict";
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search"
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:nil
-                                                                            action:NULL];
-    
-    self.movieSource = [MovieSource new];
-    self.movieSource.delegate = self;
-    self.suggestionsView.delegate = self;
-    self.tableView.delegate = self.movieSource;
-    self.tableView.dataSource = self.movieSource;
-    self.searchBar.delegate = self.movieSource;
-    
+    [self adjustInsets:nil];
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(adjustInsets:)
                                                  name:UIKeyboardWillShowNotification
@@ -112,7 +50,7 @@
     [super viewWillAppear:animated];
     
     NSIndexPath *selection = self.tableView.indexPathForSelectedRow;
-    if (selection && [UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad) {
+    if (selection) {
         [self.tableView deselectRowAtIndexPath:selection animated:animated];
     }
 }
@@ -148,6 +86,22 @@
     self.tableView.scrollIndicatorInsets = insets;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqual:@"showMovie"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        MovieViewController *destination = (id)navigationController.topViewController;
+        destination.movie = sender;
+    }
+    else if ([segue.identifier isEqualToString:@"showMore"]) {
+        MoviesViewController *destination = segue.destinationViewController;
+        destination.movieSource = [self.movieSource movieSourceForSingleRegion:sender];
+    }
+    else {
+        [super prepareForSegue:segue sender:sender];
+    }
+}
+
 #pragma mark - MovieSourceDelegate
 
 - (void)movieSource:(MovieSource *)movieSource resultsHaveChanged:(BOOL)haveResults
@@ -157,14 +111,14 @@
     
     // TODO the right half of this condition should be moved into MovieSource
     if (haveResults || self.searchBar.text.length > 0) {
-        [self showSuggestions];
+        [self hideSuggestions];
     }
     else {
-        [self hideSuggestions];
+        [self showSuggestions];
     }
 }
 
-- (void)showSuggestions
+- (void)hideSuggestions
 {
     self.suggestionsView.hidden = NO;
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
@@ -177,7 +131,7 @@
     }];
 }
 
-- (void)hideSuggestions
+- (void)showSuggestions
 {
     self.suggestionsView.hidden = NO;
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
@@ -187,16 +141,12 @@
 
 - (void)movieSource:(MovieSource *)movieSource didSelectMovie:(Movie *)movie
 {
-    MovieViewController *destination = [[MovieViewController alloc] initWithNibName:nil bundle:nil];
-    destination.movie = movie;
-    [self.navigationController pushViewController:destination animated:YES];
+    [self performSegueWithIdentifier:@"showMovie" sender:movie];
 }
 
 - (void)movieSource:(MovieSource *)movieSource didSelectRegion:(MovieRegion)region
 {
-    MoviesViewController *destination = [[MoviesViewController alloc] initWithNibName:nil bundle:nil];
-    destination.movieSource = [self.movieSource movieSourceForSingleRegion:region];
-    [self.navigationController pushViewController:destination animated:YES];
+    [self performSegueWithIdentifier:@"showMore" sender:region];
 }
 
 #pragma mark - SuggestionsViewDelegate
