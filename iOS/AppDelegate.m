@@ -41,7 +41,7 @@
     
     UINavigationController *navigationController = (id)secondaryViewController;
     if ([navigationController.topViewController isKindOfClass:[MovieViewController class]]) {
-        // If the MovieViewController does not show a movie, then do discard it while collapsing. 
+        // If the MovieViewController does not show a movie, then do discard it while collapsing.
         return ((MovieViewController *)navigationController.topViewController).movie == nil;
     }
     

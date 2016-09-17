@@ -11,17 +11,12 @@
 #import "TranslationCell.h"
 
 
-typedef enum {
-    SectionTranslations,
-    SectionButtons,
-    kSections
-} Section;
-
-
 @interface MovieViewController () <UITableViewDataSource>
 
 @property (nonatomic, copy) NSArray<MovieRegion> *regions;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *imdbButton;
+@property (weak, nonatomic) IBOutlet UIButton *wikipediaButton;
 
 @end
 
@@ -43,6 +38,9 @@ typedef enum {
         }
         self.regions = regions;
         
+        self.imdbButton.hidden = (movie.imdbURL == nil);
+        self.wikipediaButton.hidden = (movie.wikipediaURL == nil);
+        
         [self.tableView reloadData];
     }
 }
@@ -57,74 +55,40 @@ typedef enum {
     self.tableView.estimatedRowHeight = 120;
 }
 
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (void)viewWillAppear:(BOOL)animated
 {
-    return kSections;
+    [super viewWillAppear:animated];
+    
+    // When these buttons are first (un)hidden, they might still be nil (view not loaded yet).
+    self.imdbButton.hidden = (self.movie.imdbURL == nil);
+    self.wikipediaButton.hidden = (self.movie.wikipediaURL == nil);
 }
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    switch (section) {
-        case SectionTranslations:
-            return self.regions.count;
-        // TODO: Bring back IMDb/Wikipedia buttons.
-        // case SectionButtons:
-        //     return 1;
-        default:
-            return 0;
-    }
+    return self.regions.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.section) {
-        case SectionTranslations: {
-            MovieRegion region = self.regions[indexPath.row];
-            TranslationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Translation" forIndexPath:indexPath];
-            [cell setupWithRegion:region title:self.movie.titles[region]];
-            return cell;
-        }
-        case SectionButtons: {
-            return [tableView dequeueReusableCellWithIdentifier:@"Buttons" forIndexPath:indexPath];
-        }
-        default: {
-            return nil;
-        }
-    }
+    MovieRegion region = self.regions[indexPath.row];
+    TranslationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Translation" forIndexPath:indexPath];
+    [cell setupWithRegion:region title:self.movie.titles[region]];
+    return cell;
 }
 
-// TODO: Bring back IMDb/Wikipedia buttons.
-// 
-//    if (self.movie.imdbURL) {
-//        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [button addTarget:self action:@selector(openIMDb:) forControlEvents:UIControlEventTouchUpInside];
-//        [button setImage:[UIImage imageNamed:@"IMDb"] forState:UIControlStateNormal];
-//        [button sizeToFit];
-//        [self.view addSubview:button];
-//        [buttons addObject:button];
-//    }
-//    
-//    if (self.movie.wikipediaURL) {
-//        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [button addTarget:self action:@selector(openWikipedia:) forControlEvents:UIControlEventTouchUpInside];
-//        [button setImage:[UIImage imageNamed:@"Wikipedia"] forState:UIControlStateNormal];
-//        [button sizeToFit];
-//        [self.view addSubview:button];
-//        [buttons addObject:button];
-//    }
+#pragma mark - IBActions
 
-//#pragma mark - IBActions
-//
-//- (void)openWikipedia:(id)sender
-//{
-//    [[UIApplication sharedApplication] openURL:self.movie.wikipediaURL];
-//}
-//
-//- (void)openIMDb:(id)sender
-//{
-//    [[UIApplication sharedApplication] openURL:self.movie.imdbURL];
-//}
+- (IBAction)openIMDb:(id)sender
+{
+    [[UIApplication sharedApplication] openURL:self.movie.imdbURL];
+}
+
+- (IBAction)openWikipedia:(id)sender
+{
+    [[UIApplication sharedApplication] openURL:self.movie.wikipediaURL];
+}
 
 @end

@@ -123,9 +123,32 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kBX-uQ-Sxe">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="53m-4C-Rov">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <stackView key="tableFooterView" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="-100" id="Civ-iF-XKZ">
+                                    <rect key="frame" x="0.0" y="188" width="375" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKb-nb-pcR">
+                                            <state key="normal" image="IMDb"/>
+                                            <connections>
+                                                <action selector="openIMDb:" destination="JEX-9P-axG" eventType="touchUpInside" id="c19-Yk-yXq"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIO-5d-DR0">
+                                            <state key="normal" image="Wikipedia"/>
+                                            <connections>
+                                                <action selector="openWikipedia:" destination="JEX-9P-axG" eventType="touchUpInside" id="tUe-oV-h1i"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Translation" id="iLk-8f-kk5" customClass="TranslationCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="120"/>
+                                        <rect key="frame" x="0.0" y="68" width="375" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iLk-8f-kk5" id="Vrf-vV-zoj">
                                             <frame key="frameInset" width="375" height="120"/>
@@ -145,8 +168,8 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="4YK-1g-CeM" secondAttribute="trailing" id="3aZ-Jw-hKX"/>
                                                 <constraint firstItem="6qH-nC-ufP" firstAttribute="leading" secondItem="Vrf-vV-zoj" secondAttribute="leadingMargin" id="D02-Yl-sqI"/>
-                                                <constraint firstAttribute="bottom" secondItem="4YK-1g-CeM" secondAttribute="bottom" id="HSS-Yn-h6n"/>
-                                                <constraint firstItem="4YK-1g-CeM" firstAttribute="top" secondItem="Vrf-vV-zoj" secondAttribute="top" constant="40" id="S5l-ZH-CtO"/>
+                                                <constraint firstAttribute="bottom" secondItem="4YK-1g-CeM" secondAttribute="bottom" constant="40" id="HSS-Yn-h6n"/>
+                                                <constraint firstItem="4YK-1g-CeM" firstAttribute="top" secondItem="Vrf-vV-zoj" secondAttribute="top" id="S5l-ZH-CtO"/>
                                                 <constraint firstItem="4YK-1g-CeM" firstAttribute="leading" secondItem="6qH-nC-ufP" secondAttribute="trailing" constant="20" id="nQd-d6-1lm"/>
                                                 <constraint firstItem="6qH-nC-ufP" firstAttribute="width" secondItem="Vrf-vV-zoj" secondAttribute="width" multiplier="0.3" id="rZF-v7-Usc"/>
                                                 <constraint firstItem="4YK-1g-CeM" firstAttribute="top" secondItem="6qH-nC-ufP" secondAttribute="top" id="xgG-Cx-WJ5"/>
@@ -156,32 +179,6 @@
                                             <outlet property="regionLabel" destination="6qH-nC-ufP" id="B6L-zI-D2K"/>
                                             <outlet property="titleLabel" destination="4YK-1g-CeM" id="u3o-O6-TO1"/>
                                         </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Buttons" id="aQd-y5-PQd">
-                                        <rect key="frame" x="0.0" y="148" width="375" height="120"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aQd-y5-PQd" id="Jrm-bP-tzC">
-                                            <frame key="frameInset" width="375" height="120"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Civ-iF-XKZ">
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKb-nb-pcR">
-                                                            <state key="normal" title="IMDb"/>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIO-5d-DR0">
-                                                            <state key="normal" title="Wikipedia"/>
-                                                        </button>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Civ-iF-XKZ" firstAttribute="top" secondItem="Jrm-bP-tzC" secondAttribute="top" constant="20" symbolic="YES" id="3bQ-Qz-FFw"/>
-                                                <constraint firstItem="Civ-iF-XKZ" firstAttribute="leading" secondItem="Jrm-bP-tzC" secondAttribute="leading" constant="20" symbolic="YES" id="6QE-4P-ZT0"/>
-                                                <constraint firstAttribute="trailing" secondItem="Civ-iF-XKZ" secondAttribute="trailing" constant="20" symbolic="YES" id="Wbq-qc-wKg"/>
-                                                <constraint firstAttribute="bottom" secondItem="Civ-iF-XKZ" secondAttribute="bottom" constant="20" symbolic="YES" id="fKv-tZ-Gbm"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -201,7 +198,9 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="What do they call it?" id="mOI-FS-AaM"/>
                     <connections>
+                        <outlet property="imdbButton" destination="yKb-nb-pcR" id="ydG-XJ-SkE"/>
                         <outlet property="tableView" destination="kBX-uQ-Sxe" id="Yl0-P6-f6c"/>
+                        <outlet property="wikipediaButton" destination="BIO-5d-DR0" id="rhN-az-bQd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
@@ -239,6 +238,10 @@
             <point key="canvasLocation" x="-45" y="129"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="IMDb" width="69" height="33"/>
+        <image name="Wikipedia" width="92" height="33"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="MCE-5j-X6o"/>
     </inferredMetricsTieBreakers>
