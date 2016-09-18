@@ -50,6 +50,9 @@
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Htu-qx-0VJ" customClass="SuggestionsView">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="CJZ-a5-fJL" id="OaG-vx-ALI"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -124,12 +127,12 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kBX-uQ-Sxe">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="53m-4C-Rov">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="41"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <stackView key="tableFooterView" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="-100" id="Civ-iF-XKZ">
-                                    <rect key="frame" x="0.0" y="188" width="375" height="60"/>
+                                    <rect key="frame" x="0.0" y="189" width="375" height="60"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKb-nb-pcR">
@@ -148,7 +151,7 @@
                                 </stackView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Translation" id="iLk-8f-kk5" customClass="TranslationCell">
-                                        <rect key="frame" x="0.0" y="68" width="375" height="120"/>
+                                        <rect key="frame" x="0.0" y="69" width="375" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iLk-8f-kk5" id="Vrf-vV-zoj">
                                             <frame key="frameInset" width="375" height="120"/>
@@ -270,6 +273,6 @@
         <image name="Wikipedia" width="92" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Tll-UG-LXB"/>
+        <segue reference="MCE-5j-X6o"/>
     </inferredMetricsTieBreakers>
 </document>

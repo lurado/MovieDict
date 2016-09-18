@@ -25,17 +25,30 @@ static CGFloat const kSlotHeight = 44;
 
 @implementation SuggestionsView
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        [self setupSuggestionsView];
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor whiteColor];
-        
-        self.occupiedSlots = [NSMutableIndexSet new];
-        
-        // Get this party started!
-        [self addSuggestion];
+        [self setupSuggestionsView];
     }
     return self;
+}
+
+- (void)setupSuggestionsView
+{
+    self.backgroundColor = [UIColor whiteColor];
+    
+    self.occupiedSlots = [NSMutableIndexSet new];
+    
+    // Get this party started!
+    [self addSuggestion];
 }
 
 - (void)addSuggestion

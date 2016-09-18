@@ -22,6 +22,6 @@
 
 @interface SuggestionsView : UIView
 
-@property (nonatomic, weak) id<SuggestionsViewDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<SuggestionsViewDelegate> delegate;
 
 @end
