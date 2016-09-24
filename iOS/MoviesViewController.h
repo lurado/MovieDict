@@ -13,5 +13,6 @@
 @interface MoviesViewController : UITableViewController
 
 @property (nonatomic) MovieSource *movieSource;
+@property (nonatomic) CGFloat currentKeyboardHeight;
 
 @end

@@ -53,6 +53,19 @@
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 120;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(adjustInsets:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(adjustInsets:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(adjustInsets:)
+                                                 name:UIKeyboardWillChangeFrameNotification
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,6 +75,25 @@
     // When these buttons are first (un)hidden, they might still be nil (view not loaded yet).
     self.imdbButton.hidden = (self.movie.imdbURL == nil);
     self.wikipediaButton.hidden = (self.movie.wikipediaURL == nil);
+}
+
+- (void)adjustInsets:(NSNotification *)notification
+{
+    NSValue *frameValue = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
+    if (frameValue) {
+        CGRect keyboardFrame = [self.view convertRect:frameValue.CGRectValue fromView:self.view.window];
+        self.currentKeyboardHeight = self.view.bounds.size.height - CGRectGetMinY(keyboardFrame);
+    }
+}
+
+- (void)setCurrentKeyboardHeight:(CGFloat)currentKeyboardHeight
+{
+    _currentKeyboardHeight = currentKeyboardHeight;
+ 
+    [self loadViewIfNeeded];
+    UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, currentKeyboardHeight, 0);
+    self.tableView.contentInset = insets;
+    self.tableView.scrollIndicatorInsets = insets;
 }
 
 #pragma mark - UITableViewDataSource

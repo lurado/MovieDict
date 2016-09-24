@@ -29,8 +29,8 @@
 
 - (void)viewDidLoad
 {
-    [self adjustInsets:nil];
-
+    self.currentKeyboardHeight = 0;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(adjustInsets:)
                                                  name:UIKeyboardWillShowNotification
@@ -74,14 +74,19 @@
 
 - (void)adjustInsets:(NSNotification *)notification
 {
-    UIEdgeInsets insets = UIEdgeInsetsMake(self.searchBar.frame.size.height, 0, 0, 0);
-    
     NSValue *frameValue = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
     if (frameValue) {
         CGRect keyboardFrame = [self.view convertRect:frameValue.CGRectValue fromView:self.view.window];
-        insets.bottom = self.view.bounds.size.height - CGRectGetMinY(keyboardFrame);
+        self.currentKeyboardHeight = self.view.bounds.size.height - CGRectGetMinY(keyboardFrame);
     }
+}
+
+- (void)setCurrentKeyboardHeight:(CGFloat)currentKeyboardHeight
+{
+    _currentKeyboardHeight = currentKeyboardHeight;
     
+    [self loadViewIfNeeded];
+    UIEdgeInsets insets = UIEdgeInsetsMake(self.searchBar.frame.size.height, 0, currentKeyboardHeight, 0);
     self.tableView.contentInset = insets;
     self.tableView.scrollIndicatorInsets = insets;
 }
@@ -92,10 +97,12 @@
         UINavigationController *navigationController = segue.destinationViewController;
         MovieViewController *destination = (id)navigationController.topViewController;
         destination.movie = sender;
+        destination.currentKeyboardHeight = self.currentKeyboardHeight;
     }
     else if ([segue.identifier isEqualToString:@"showMore"]) {
         MoviesViewController *destination = segue.destinationViewController;
         destination.movieSource = [self.movieSource movieSourceForSingleRegion:sender];
+        destination.currentKeyboardHeight = self.currentKeyboardHeight;
     }
     else {
         [super prepareForSegue:segue sender:sender];

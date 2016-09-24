@@ -11,4 +11,6 @@
 
 @interface SearchViewController : UIViewController
 
+@property (nonatomic) CGFloat currentKeyboardHeight;
+
 @end

@@ -15,5 +15,6 @@
 @interface MovieViewController : UIViewController <UISplitViewControllerDelegate>
 
 @property (nonatomic) Movie *movie;
+@property (nonatomic) CGFloat currentKeyboardHeight;
 
 @end

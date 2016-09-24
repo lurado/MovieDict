@@ -22,7 +22,7 @@
     
     movieSource.delegate = self;
     
-    [self loadView];
+    [self loadViewIfNeeded];
     self.navigationItem.title = [Movie nameOfRegion:movieSource.region];
     self.tableView.delegate = movieSource;
     self.tableView.dataSource = movieSource;
@@ -37,6 +37,7 @@
         UINavigationController *navigationController = segue.destinationViewController;
         MovieViewController *destination = (id)navigationController.topViewController;
         destination.movie = sender;
+        destination.currentKeyboardHeight = self.currentKeyboardHeight;
     }
     else {
         [super prepareForSegue:segue sender:sender];
