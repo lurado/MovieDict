@@ -1,43 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ege-ZL-uiO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ege-ZL-uiO">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--MovieDict-->
+        <!--View Controller-->
         <scene sceneID="tJ1-Og-Lw5">
             <objects>
                 <viewController id="KuE-uk-hRI" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Fhp-xT-qQg"/>
+                        <viewControllerLayoutGuide type="bottom" id="h49-Wl-tw5"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GDE-H0-mcr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="639" height="1302"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="DaU-s5-fgF">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DaU-s5-fgF">
+                                <frame key="frameInset" height="44" maxX="-940"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items/>
-                                <color key="barTintColor" red="0.74901960784313726" green="0.74901960784313726" blue="0.7686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.74901960784313726" green="0.74901960784313726" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <variation key="widthClass=regular">
+                            <mask key="subviews">
+                                <exclude reference="DaU-s5-fgF"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="MovieDict" id="CBB-Z1-8Vn"/>
+                    <navigationItem key="navigationItem" id="CBB-Z1-8Vn"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RD3-XS-t3S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="141" y="497"/>
+            <point key="canvasLocation" x="225.60000000000002" y="447.0764617691155"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="u4Z-Yy-Xxc">
             <objects>
                 <navigationController id="ege-ZL-uiO" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="cZU-GL-ztw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.64313725490196083" green="0.066666666666666666" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.64313725490196083" green="0.066666666666666666" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="KuE-uk-hRI" kind="relationship" relationship="rootViewController" id="tez-60-eCR"/>
@@ -45,12 +53,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0uz-vr-Sv4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-269.33333333333331" y="497.94666666666666"/>
+            <point key="canvasLocation" x="-430.93333333333334" y="447.92803598200902"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>
