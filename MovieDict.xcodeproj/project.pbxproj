@@ -275,6 +275,7 @@
 				TargetAttributes = {
 					D4E5B8F917E85B4400C77D46 = {
 						DevelopmentTeam = 95FA22JKUY;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -387,7 +388,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -431,7 +431,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -455,6 +454,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 95FA22JKUY;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					SQLITE_ENABLE_FTS3,
 					SQLITE_ENABLE_FTS3_PARENTHESIS,
@@ -472,6 +473,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 95FA22JKUY;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					SQLITE_ENABLE_FTS3,
 					SQLITE_ENABLE_FTS3_PARENTHESIS,
