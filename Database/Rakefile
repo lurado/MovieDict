@@ -6,7 +6,7 @@ require 'mysql2'
 # Download and extract the following dumps into this directory:
 WIKIDUMPS      = ENV['WIKIDUMPS']
 LANGLINKS_FILE = Dir.glob("#{WIKIDUMPS}/enwiki-????????-langlinks.sql").first
-ENWIKI_FILE    = Dir.glob("#{WIKIDUMPS}/enwiki-????????-pages-*-*.xml").first
+ENWIKI_FILE    = Dir.glob("#{WIKIDUMPS}/enwiki-????????-pages-*-*.xml.bz2").first
 ZHWIKI_FILE    = Dir.glob("#{WIKIDUMPS}/zhwiki-????????-pages-*-*.xml").first
 
 # 'zh' is "Chinese" in general - the name from Wikipedia if there are no separate names for tw/hk/cn
