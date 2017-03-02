@@ -57,6 +57,10 @@
     }
     
     NSMutableString *result = [title.uppercaseString mutableCopy];
+    
+    // Ensure that the former character is romanised in the same way as the latter (ni3, not nai3).
+    [result replaceOccurrencesOfString:@"妳" withString:@"你" options:0 range:NSMakeRange(0, result.length)];
+    
     if (CFStringTransform((__bridge CFMutableStringRef)result, NULL, kCFStringTransformMandarinLatin, NO)) {
         return [result copy];
     }
