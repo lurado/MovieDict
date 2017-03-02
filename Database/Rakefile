@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sqlite3'
 require 'mysql2'
+require 'shellwords'
 
 
 # Download and extract the following dumps into this directory:
