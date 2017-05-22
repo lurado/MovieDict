@@ -6,16 +6,12 @@ desc "Extracts all English pages about movies into ./enwiki as plain text files"
 task :extract_english_movies => 'extract_movies.bin' do
   rm_rf 'enwiki'
   mkdir_p 'enwiki'
-  # TODO: curl -s <filename> | bzcat | ./extract_movies ...
-  # TODO +caffeinate
-  sh "bzcat #{ENWIKI_FILE} | ./extract_movies.bin enwiki"
+  sh "curl -s https://dumps.wikimedia.org/enwiki/#{EN_DATE}/enwiki-#{EN_DATE}-pages-articles-multistream.xml.bz2 | bzcat | ./extract_movies.bin enwiki"
 end
 
 desc "Extracts all Chinese pages about movies into ./zhwiki as plain text files"
 task :extract_chinese_movies => 'extract_movies.bin' do
   rm_rf 'zhwiki'
   mkdir_p 'zhwiki'
-  # TODO: curl -s <filename> | bzcat | ./extract_movies ...
-  # TODO +caffeinate
-  sh "cat '#{ZHWIKI_FILE}' | ./extract_movies.bin zhwiki"
+  sh "caffeinate curl -s https://dumps.wikimedia.org/zhwiki/#{ZH_DATE}/zhwiki-#{ZH_DATE}-pages-articles-multistream.xml.bz2 | bzcat | ./extract_movies.bin zhwiki"
 end

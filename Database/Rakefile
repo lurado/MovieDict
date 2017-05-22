@@ -4,11 +4,11 @@ require 'mysql2'
 require 'shellwords'
 
 
-# Download and extract the following dumps into this directory:
-WIKIDUMPS      = ENV['WIKIDUMPS']
-LANGLINKS_FILE = Dir.glob("#{WIKIDUMPS}/enwiki-????????-langlinks.sql").first
-ENWIKI_FILE    = Dir.glob("#{WIKIDUMPS}/enwiki-????????-pages-*-*.xml.bz2").first
-ZHWIKI_FILE    = Dir.glob("#{WIKIDUMPS}/zhwiki-????????-pages-*-*.xml").first
+# Find the last completed dump here: https://dumps.wikimedia.org/enwiki/
+EN_DATE = ENV["EN_DATE"] || raise("Set EN_DATE to last completed enwiki dump date (e.g. 20170501)")
+# Find the last completed dump here: https://dumps.wikimedia.org/zhwiki/
+ZH_DATE = ENV["ZH_DATE"] || raise("Set ZH_DATE to last completed zhwiki dump date (e.g. 20170501)")
+
 
 # 'zh' is "Chinese" in general - the name from Wikipedia if there are no separate names for tw/hk/cn
 # 'cn' is the PRC
@@ -61,9 +61,10 @@ task :export_list => :close_database do
   sqlite_cli "SELECT id, en, wikipedia FROM movies", "> Movies.csv"
 end
 
-desc "Runs the full pipeline, up to the finished Movies.db file"
+desc "Runs the full pipeline, up to the finished Movies.db file; best used with `caffeinate rake…`"
 task :default => [:extract_english_movies,
                   :create_english_database,
+                  :import_translations,
                   :add_translations,
                   :extract_chinese_movies,
                   :add_chinese_variants,

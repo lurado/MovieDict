@@ -1,6 +1,12 @@
+desc "Imports translations from the langlinks dump"
+task :import_translations do
+  sh "echo 'drop database langlinks; create database langlinks' | mysql -uroot"
+  sh "curl -s https://dumps.wikimedia.org/enwiki/#{EN_DATE}/enwiki-#{EN_DATE}-langlinks.sql.gz | gzcat | mysql -uroot -D langlinks"  
+end
+
 desc "Adds translations from the langlinks table to Movies.db"
 task :add_translations => :database do
-  mysql = Mysql2::Client.new(:host => "localhost", :username => "root", :database => "wikidumps")
+  mysql = Mysql2::Client.new(:host => "localhost", :username => "root", :database => "langlinks")
   
   languages_to_query = LANGUAGES - CHINESE_VARIANTS
   $db.execute("SELECT id, en, wikipedia FROM movies") do |id, en, wikipedia_link|

@@ -19,8 +19,7 @@ IMDb does not support Chinese or Japanese characters (among others), and is not 
 
 ## Building the database
 
-* Download and extract enwiki, zhwiki, enwiki langlinks to a folder that has roughly 100 GB of free space.
-* Import the langlinks table into MySQL: `mysqladmin -uroot -p create wikidumps && mysql -Dwikidumps -uroot -p < .../enwiki-20141106-langlinks.sql` (should take about an hour).
+* The database building is being rewritten to happen in-memory (without downloading large wiki dumps). See https://github.com/lurado/MovieDict/issues/14
 * Then take a look at the `Rakefile`. There is a task that will run the full process, but manually running things step-by-step while reading the Ruby scripts is the recommended workflow.
 
 ## License
