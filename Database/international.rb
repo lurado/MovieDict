@@ -1,7 +1,7 @@
 desc "Imports translations from the langlinks dump"
 task :import_translations do
-  sh "echo 'drop database langlinks; create database langlinks' | mysql -uroot"
-  sh "curl -s https://dumps.wikimedia.org/enwiki/#{EN_DATE}/enwiki-#{EN_DATE}-langlinks.sql.gz | gzcat | mysql -uroot -D langlinks"  
+  sh "echo 'DROP DATABASE IF EXISTS langlinks; CREATE DATABASE langlinks' | mysql -uroot"
+  sh "caffeinate curl https://dumps.wikimedia.org/enwiki/#{EN_DATE}/enwiki-#{EN_DATE}-langlinks.sql.gz | gzcat | mysql -uroot -D langlinks"  
 end
 
 desc "Adds translations from the langlinks table to Movies.db"

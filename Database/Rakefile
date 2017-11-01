@@ -61,12 +61,12 @@ task :export_list => :close_database do
   sqlite_cli "SELECT id, en, wikipedia FROM movies", "> Movies.csv"
 end
 
-desc "Runs the full pipeline, up to the finished Movies.db file; best used with `caffeinate rake…`"
-task :default => [:extract_english_movies,
-                  :create_english_database,
-                  :import_translations,
-                  :add_translations,
+desc "Runs the full pipeline, up to the finished Movies.db file"
+task :default => [:import_translations,
+                  :extract_english_movies,
                   :extract_chinese_movies,
+                  :create_english_database,
+                  :add_translations,
                   :add_chinese_variants,
                   :fill_suggestion_column,
                   :'fts:all',
