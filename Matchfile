@@ -1,4 +1,4 @@
-git_url "https://github.com/lurado/match.git"
+git_url "git@github.com:lurado/match.git"
 
 type "development" # The default type, can be: appstore, adhoc or development
 
