@@ -51,8 +51,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
     if (self.results == nil && self.finishedSearchText.length > 0) {
         // Single section with single "no results" cell.
         return 1;
-    }
-    else {
+    } else {
         return self.results.count;
     }
 }
@@ -62,8 +61,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
     if (self.results == nil && self.finishedSearchText.length > 0) {
         // "No results" cell.
         return 1;
-    }
-    else {
+    } else {
         MovieResults *resultsForRegion = self.results[section];
         // +1 for "more results from this region" cell.
         return resultsForRegion.movies.count + (resultsForRegion.haveMore ? 1 : 0);
@@ -76,15 +74,13 @@ NSUInteger const kRegionShowMoreLimit = 250;
     if (self.results == nil && self.finishedSearchText.length > 0) {
         // "No results" cell
         return [self noResultsCellInTableView:tableView];
-    }
-    else if (indexPath.row >= self.results[indexPath.section].movies.count) {
+    } else if (indexPath.row >= self.results[indexPath.section].movies.count) {
         if (self.region == nil) {
             // If we are showing movies from all regions, let the user drill down into every region
             // which has more movies available:
             return [self showMoreResultsCellForRegion:self.results[indexPath.section].region
                                           inTableView:tableView];
-        }
-        else {
+        } else {
             // If the user has already filtered by region, we can't drill down any further:
             return [self tooManyResultsCellInTableView:tableView];
         }
@@ -163,8 +159,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
     cell.textLabel.text = movie.titles[results.region];
     if (englishTitle == nil || results.region == kMovieRegionEnglish) {
         cell.detailTextLabel.text = nil;
-    }
-    else {
+    } else {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"International title: %@",
                                      englishTitle];
     }
@@ -172,8 +167,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
     if (movie.year) {
         if (cell.detailTextLabel.text.length == 0) {
             cell.detailTextLabel.text = [NSString stringWithFormat:@"(%@)", @(movie.year)];
-        }
-        else {
+        } else {
             cell.detailTextLabel.text =
                 [cell.detailTextLabel.text stringByAppendingFormat:@" (%@)", @(movie.year)];
         }
@@ -240,8 +234,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
     MovieResults *results = self.results[indexPath.section];
     if (indexPath.row < results.movies.count) {
         [self.delegate movieSource:self didSelectMovie:results.movies[indexPath.row]];
-    }
-    else if ([self.delegate respondsToSelector:@selector(movieSource:didSelectRegion:)]) {
+    } else if ([self.delegate respondsToSelector:@selector(movieSource:didSelectRegion:)]) {
         [self.delegate movieSource:self didSelectRegion:results.region];
     }
 }

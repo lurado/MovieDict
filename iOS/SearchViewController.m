@@ -99,13 +99,11 @@
         MovieViewController *destination = (id)navigationController.topViewController;
         destination.movie = sender;
         destination.currentKeyboardHeight = self.currentKeyboardHeight;
-    }
-    else if ([segue.identifier isEqualToString:@"showMore"]) {
+    } else if ([segue.identifier isEqualToString:@"showMore"]) {
         MoviesViewController *destination = segue.destinationViewController;
         destination.movieSource = [self.movieSource movieSourceForSingleRegion:sender];
         destination.currentKeyboardHeight = self.currentKeyboardHeight;
-    }
-    else {
+    } else {
         [super prepareForSegue:segue sender:sender];
     }
 }
@@ -134,8 +132,7 @@
     // there are no search results right now.
     if (haveResults || self.searchBar.text.length > 0) {
         [self hideSuggestions];
-    }
-    else {
+    } else {
         [self showSuggestions];
     }
 }

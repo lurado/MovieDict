@@ -73,8 +73,7 @@
     if (CFStringTransform((__bridge CFMutableStringRef)result, NULL,
                           kCFStringTransformMandarinLatin, NO)) {
         return [result copy];
-    }
-    else {
+    } else {
         return nil;
     }
 }

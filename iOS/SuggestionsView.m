@@ -129,8 +129,7 @@ static CGFloat const kSlotHeight = 44;
         buttonFrame.origin.x = arc4random_uniform(CGRectGetMaxX(self.bounds));
         button.titleLabel.alpha = 0;
         duration *= 0.8;
-    }
-    else {
+    } else {
         // After the initial fill, all suggestions float into view from the right-hand side.
         buttonFrame.origin.x = arc4random_uniform(CGRectGetMaxX(self.bounds))
                              + CGRectGetMaxX(self.bounds)
@@ -153,8 +152,7 @@ static CGFloat const kSlotHeight = 44;
         // ...then take it out of the view hierarchy.
         if (finished) {
             [button removeFromSuperview];
-        }
-        else {
+        } else {
             // If this animation wasn't finished, that means the view was tapped by the user and we
             // should only remove it after the move-to-top animation has finished.
             [button performSelector:@selector(removeFromSuperview)

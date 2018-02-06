@@ -100,8 +100,7 @@
             
             // Fetch one more result than actually asked for; see below.
             s = [db executeQuery:SQL, @(limit + 1)];
-        }
-        else {
+        } else {
             NSString *safeString = string;
             safeString = [safeString stringByReplacingOccurrencesOfString:@"%" withString:@"%%"];
 

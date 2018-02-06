@@ -34,8 +34,7 @@
         MovieViewController *destination = (id) navigationController.topViewController;
         destination.movie = sender;
         destination.currentKeyboardHeight = self.currentKeyboardHeight;
-    }
-    else {
+    } else {
         [super prepareForSegue:segue sender:sender];
     }
 }

@@ -46,8 +46,7 @@
         [self.plecoButton setBackgroundImage:[self.class plecoButtonBackground]
                                     forState:UIControlStateNormal];
         self.plecoButton.hidden = NO;
-    }
-    else {
+    } else {
         self.plecoButton.hidden = YES;
     }
 }
