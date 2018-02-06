@@ -17,7 +17,7 @@ NSUInteger const kTotalLimit = 50;
 NSUInteger const kRegionShowMoreLimit = 250;
 
 
-@interface MovieSource () <FindMoviesOperationDelegate>
+@interface MovieSource ()
 
 @property (nonatomic, copy) MovieRegion region;
 @property (nonatomic) NSOperationQueue *searchQueue;
@@ -48,7 +48,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
         return 1;
     }
     else {
-        return [Movie allRegions].count;
+        return self.results.count;
     }
 }
 
@@ -105,7 +105,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
         return nil;
     }
     
-    MovieRegion region = [Movie allRegions][section];
+    MovieRegion region = self.results[section].region;
     return [[Movie nameOfRegion:region] stringByAppendingString:@" movie titles"];
 }
 
@@ -142,12 +142,12 @@ NSUInteger const kRegionShowMoreLimit = 250;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
     
-    Movie *movie = self.results[indexPath.section].movies[indexPath.row];
+    MovieResults *results = self.results[indexPath.section];
+    Movie *movie = results.movies[indexPath.row];
     NSString *englishTitle = movie.titles[kMovieRegionEnglish];
     
-    MovieRegion region = [Movie allRegions][indexPath.section];
-    cell.textLabel.text = movie.titles[region];
-    if (englishTitle == nil || region == kMovieRegionEnglish) {
+    cell.textLabel.text = movie.titles[results.region];
+    if (englishTitle == nil || results.region == kMovieRegionEnglish) {
         cell.detailTextLabel.text = @"";
     }
     else {
@@ -249,25 +249,31 @@ NSUInteger const kRegionShowMoreLimit = 250;
     operation.regionLimit = kRegionLimit;
     operation.totalLimit = kTotalLimit;
     operation.query = query;
-    operation.delegate = self;
+    
+    FindMoviesOperation __weak *weakOperation = operation;
+    operation.completionBlock = ^{
+        [self findMoviesOperationDidFinish:weakOperation];
+    };
+    
     [self.searchQueue addOperation:operation];
 }
 
-- (Movie *)movieAtIndexPath:(NSIndexPath *)indexPath
-{
-    return self.results[indexPath.section].movies[indexPath.row];
-}
-
-#pragma mark - FindMoviesOperationDelegate
-
 - (void)findMoviesOperationDidFinish:(FindMoviesOperation *)operation
 {
-    if ([self.currentQuery isEqual:operation.query]) {
-        self.finishedQuery = operation.query;
-        self.results = operation.results;
-        BOOL haveMovies = (self.results != nil);
-        [self.delegate movieSource:self resultsHaveChanged:haveMovies];
+    // Ignore cancelled operations as they might have inconsistent results.
+    if (operation.cancelled) {
+        return;
     }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // If these results are still what the user is looking for, let our delegate know:
+        if ([self.currentQuery isEqual:operation.query]) {
+            self.finishedQuery = operation.query;
+            self.results = operation.results;
+            BOOL haveMovies = (self.results != nil);
+            [self.delegate movieSource:self resultsHaveChanged:haveMovies];
+        }
+    });
 }
 
 #pragma mark - Splitting off into a single-region data source
@@ -282,7 +288,12 @@ NSUInteger const kRegionShowMoreLimit = 250;
     operation.regionLimit = operation.totalLimit = kRegionShowMoreLimit;
     operation.region = region;
     operation.query = source.currentQuery;
-    operation.delegate = source;
+    
+    FindMoviesOperation __weak *weakOperation = operation;
+    operation.completionBlock = ^{
+        [source findMoviesOperationDidFinish:weakOperation];
+    };
+    
     [source.searchQueue addOperation:operation];
 
     return source;

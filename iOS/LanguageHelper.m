@@ -12,12 +12,14 @@
 
 @implementation LanguageHelper
 
-+ (NSCharacterSet *)chineseCharacters {
+/// Returns an NSCharacterSet that contains all Chinese characters found in Unicode.
++ (nonnull NSCharacterSet *)chineseCharacters
+{
     static NSMutableCharacterSet *chineseCharacters;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         chineseCharacters = [NSMutableCharacterSet new];
-        // Taken from Wikipedia. This doesn't have to be super accurate; a few false positives are okay.
+        // Taken from Wikipedia. This doesn't have to be 100% accurate, false positives are okay.
         // Parts of plane 0 / BMP:
         // CJK Radicals Supplement (2E80–2EFF)
         // Kangxi Radicals (2F00–2FDF)
@@ -44,24 +46,32 @@
 
 + (BOOL)isChineseTitle:(NSString *)title region:(MovieRegion)region
 {
-    NSArray *chineseRegions = @[kMovieRegionChinese, kMovieRegionTaiwan, kMovieRegionHongKong, kMovieRegionChina];
+    // Do not consider e.g. Japanese Kanji titles "Chinese" because looking them up inside Pleco
+    // doesn't make sense.
+    NSArray *chineseRegions =
+        @[kMovieRegionChinese, kMovieRegionTaiwan, kMovieRegionHongKong, kMovieRegionChina];
+
     return [chineseRegions containsObject:region] &&
         [title rangeOfCharacterFromSet:[self chineseCharacters]].length > 0;
 }
 
-+ (NSString *)romanizationForTitle:(NSString *)title region:(MovieRegion)region
-{
-    // Do not romanise Hong Kong titles; they're Cantonese
-    if (region == kMovieRegionHongKong || ![self isChineseTitle:title region:region]) {
++ (nullable NSString *)romanizationForTitle:(NSString *)title region:(MovieRegion)region
+{    
+    // Do not romanise Hong Kong titles, they're Cantonese.
+    if (region == kMovieRegionHongKong || ! [self isChineseTitle:title region:region]) {
         return nil;
     }
     
     NSMutableString *result = [title.uppercaseString mutableCopy];
     
-    // Ensure that the former character is romanised in the same way as the latter (ni3, not nai3).
-    [result replaceOccurrencesOfString:@"妳" withString:@"你" options:0 range:NSMakeRange(0, result.length)];
+    // Ensure that the former character is romanized in the same way as the latter (ni3, not nai3).
+    [result replaceOccurrencesOfString:@"妳"
+                            withString:@"你"
+                               options:0
+                                 range:NSMakeRange(0, result.length)];
     
-    if (CFStringTransform((__bridge CFMutableStringRef)result, NULL, kCFStringTransformMandarinLatin, NO)) {
+    if (CFStringTransform((__bridge CFMutableStringRef)result, NULL,
+                          kCFStringTransformMandarinLatin, NO)) {
         return [result copy];
     }
     else {

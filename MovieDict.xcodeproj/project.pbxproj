@@ -22,6 +22,7 @@
 		D4362DA61A4AE23E00988604 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E5B8FF17E85B4400C77D46 /* CoreGraphics.framework */; };
 		D4362DA91A4AEC2B00988604 /* SuggestionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4362DA81A4AEC2B00988604 /* SuggestionsView.m */; };
 		D4362DAD1A4AEF2300988604 /* MovieSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D4362DAC1A4AEF2300988604 /* MovieSource.m */; };
+		D4398A342029B2BF0098F18C /* MovieDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D4398A332029B2BF0098F18C /* MovieDatabase.m */; };
 		D444944717EDEA5C0096147B /* LanguageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D444944617EDEA5C0096147B /* LanguageHelper.m */; };
 		D479D2AC1B1B19A000F67DEF /* FindMoviesOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D479D2AB1B1B19A000F67DEF /* FindMoviesOperation.m */; };
 		D4C6C5CB1D327734008CE482 /* Branding.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C6C5CA1D327734008CE482 /* Branding.m */; };
@@ -62,6 +63,8 @@
 		D4362DA81A4AEC2B00988604 /* SuggestionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestionsView.m; sourceTree = "<group>"; };
 		D4362DAB1A4AEF2300988604 /* MovieSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieSource.h; sourceTree = "<group>"; };
 		D4362DAC1A4AEF2300988604 /* MovieSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieSource.m; sourceTree = "<group>"; };
+		D4398A322029B2BF0098F18C /* MovieDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDatabase.h; sourceTree = "<group>"; };
+		D4398A332029B2BF0098F18C /* MovieDatabase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieDatabase.m; sourceTree = "<group>"; };
 		D444944517EDEA5C0096147B /* LanguageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageHelper.h; sourceTree = "<group>"; };
 		D444944617EDEA5C0096147B /* LanguageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageHelper.m; sourceTree = "<group>"; };
 		D479D2AA1B1B19A000F67DEF /* FindMoviesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindMoviesOperation.h; sourceTree = "<group>"; };
@@ -153,6 +156,8 @@
 				D42969AD17E9CA5E00BCD8AA /* Movie.m */,
 				D41A6D3D1D3BD3E500A5680C /* MovieResults.h */,
 				D41A6D3E1D3BD3E500A5680C /* MovieResults.m */,
+				D4398A322029B2BF0098F18C /* MovieDatabase.h */,
+				D4398A332029B2BF0098F18C /* MovieDatabase.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 				D479D2AC1B1B19A000F67DEF /* FindMoviesOperation.m in Sources */,
 				D4FA62041D8D85FD0071B81B /* TranslationCell.m in Sources */,
 				D40838D41A4798F8004BE0D9 /* FMDatabasePool.m in Sources */,
+				D4398A342029B2BF0098F18C /* MovieDatabase.m in Sources */,
 				D40838D51A4798F8004BE0D9 /* FMDatabaseQueue.m in Sources */,
 				D41A6D3F1D3BD3E500A5680C /* MovieResults.m in Sources */,
 				D42969AE17E9CA5E00BCD8AA /* Movie.m in Sources */,

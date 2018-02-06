@@ -7,45 +7,47 @@
 //
 
 #import "FindMoviesOperation.h"
-#import "Movie.h"
+#import "MovieDatabase.h"
 
 
 @implementation FindMoviesOperation
+{
+    NSMutableArray<MovieResults *> *_results;
+}
 
 - (void)main
 {
-    NSMutableArray<MovieResults *> *results = [NSMutableArray new];
     NSUInteger totalResults = 0;
+    _results = [NSMutableArray new];
     
-    for (NSString *region in [Movie allRegions]) {
+    NSArray<MovieRegion> *relevantRegions = (self.region ? @[self.region] : [Movie allRegions]);
+    
+    for (MovieRegion region in relevantRegions) {
         if (self.cancelled) {
             return;
         }
         
-        if (self.region && region != self.region) {
-            [results addObject:[MovieResults new]];
-        }
-        else {
-            MovieResults *resultsForRegion = [Movie moviesMatchingString:self.query inRegion:region limit:self.regionLimit];
-            totalResults += resultsForRegion.movies.count;
-            [results addObject:resultsForRegion];
+        MovieResults *resultsInRegion = [[MovieDatabase sharedDatabase] searchFor:self.query
+                                                                         inRegion:region
+                                                                            limit:self.regionLimit];
+        if (resultsInRegion.movies.count > 0) {
+            totalResults += resultsInRegion.movies.count;
+            [_results addObject:resultsInRegion];
         }
     }
     
-    if (totalResults > 0) {
-        _results = [results copy];
-        [self trimResults:totalResults];
-    }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (! self.cancelled) {
-            [self.delegate findMoviesOperationDidFinish:self];
-        }
-    });
+    [self trimResults:totalResults];
 }
 
+
+/// Removes entries from regional results until the number of total results matches the limit
+/// configured via .totalLimit.
+/// @param totalResults Current total number of results across all regions.
 - (void)trimResults:(NSUInteger)totalResults
 {
+    // This algorithm is highly inefficient, but this doesn't matter since in the worst case it
+    // has to trim down our results from .regionLimit to .totalLimit.
+    
     while (totalResults > self.totalLimit) {
         MovieResults *resultsWithMostMovies = nil;
 
@@ -60,6 +62,14 @@
         resultsWithMostMovies.haveMore = YES;
         totalResults -= 1;
     }
+}
+
+- (NSArray<MovieResults *> *)results
+{
+    NSAssert(! self.cancelled, @"must not call .results on cancelled operation");
+    NSAssert(_results != nil, @"finished operation must have at least an empty results array");
+    
+    return _results;
 }
 
 @end

@@ -10,28 +10,26 @@
 #import "MovieResults.h"
 #import "Movie.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
-@protocol FindMoviesOperationDelegate;
-
-
+/// This operation wraps the synchronous database search found in the Movie class.
 @interface FindMoviesOperation : NSOperation
 
-@property (nonatomic, weak) id<FindMoviesOperationDelegate> delegate;
-
+/// The maximum number of results per region.
 @property (nonatomic) NSInteger regionLimit;
+/// The maximum number of results in total.
 @property (nonatomic) NSInteger totalLimit;
 
-@property (nonatomic, copy) MovieRegion region;
-@property (nonatomic, copy) NSString *query;
+/// The region that movies will be searched in, or nil for all regions.
+@property (nullable, nonatomic) MovieRegion region;
 
-@property (nonatomic, readonly) NSArray<MovieResults *> *results;
+/// The string to search for.
+@property (nullable, nonatomic, copy) NSString *query;
 
-@end
-
-
-@protocol FindMoviesOperationDelegate
-
-@required
-- (void)findMoviesOperationDidFinish:(FindMoviesOperation *)operation;
+/// After the operation has finished, this array will entries for each MovieRegion for which results
+/// could be found.
+@property (nonnull, nonatomic, readonly) NSArray<MovieResults *> *results;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -9,6 +9,7 @@
 #import "SuggestionsView.h"
 #import "SuggestionsButton.h"
 #import "Movie.h"
+#import "MovieDatabase.h"
 
 
 static NSInteger const kSuggestionsCount = 5;
@@ -54,7 +55,7 @@ static CGFloat const kSlotHeight = 44;
 - (void)addSuggestion
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        Movie *movie = [Movie randomSuggestion];
+        Movie *movie = [[MovieDatabase sharedDatabase] randomSuggestion];
         NSArray *allTitles = [movie.titles allValues];
         NSString *anyTitle = allTitles[arc4random_uniform((u_int32_t)allTitles.count)];
         
