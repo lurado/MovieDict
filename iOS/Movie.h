@@ -56,6 +56,9 @@ extern MovieRegion const kMovieRegionFrance;
 /// The human-readable name of a region.
 + (NSString *)nameOfRegion:(MovieRegion)region;
 
+/// The shorter name of a region, for display in a narrow table.
++ (NSString *)shortNameOfRegion:(MovieRegion)region;
+
 @end
 
 NS_ASSUME_NONNULL_END

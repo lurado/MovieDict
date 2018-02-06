@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Movie.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
+/// A table cell that contains the translation for a movie, as shown on the MovieViewController.
 @interface TranslationCell : UITableViewCell
 
-- (void)setupWithRegion:(NSString *)region title:(NSString *)title;
+- (void)setupWithRegion:(MovieRegion)region title:(NSString *)title;
 
 @end
+
+NS_ASSUME_NONNULL_END

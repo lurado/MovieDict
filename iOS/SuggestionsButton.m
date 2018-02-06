@@ -27,27 +27,33 @@
     button.userInteractionEnabled = NO;
     [button setTitleColor:[Branding movieDictColor] forState:UIControlStateNormal];
     
+    [button setupMotionEffect:size];
+    
+    return button;
+}
+
+/// This methods configured an iOS 7-style motion effect when the phone is rotated in space.
+- (void)setupMotionEffect:(CGFloat)size
+{
     UIInterpolatingMotionEffect *effectX =
     [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x"
                                                     type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
     effectX.minimumRelativeValue = @(-size +14);
     effectX.maximumRelativeValue = @(+size -14);
-    [button addMotionEffect:effectX];
+    [self addMotionEffect:effectX];
     
     UIInterpolatingMotionEffect *effectY =
     [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y"
                                                     type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
     effectY.minimumRelativeValue = @((-size +14) * 1.4);
     effectY.maximumRelativeValue = @((+size -14) * 1.4);
-    [button addMotionEffect:effectY];
-    
-    return button;
+    [self addMotionEffect:effectY];
 }
 
 - (NSString *)searchQuery
 {
-    return [self titleForState:UIControlStateNormal] ?:
-        [self attributedTitleForState:UIControlStateNormal].string;
+    // Simply read the title back from the button.
+    return [self attributedTitleForState:UIControlStateNormal].string;
 }
 
 @end

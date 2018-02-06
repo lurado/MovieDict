@@ -158,7 +158,7 @@
 
 #pragma mark - SuggestionsViewDelegate
 
-- (void)suggestionsView:(SuggestionsView *)suggestionsView didSelectSuggestion:(NSString *)suggestion
+- (void)suggestionsViewDidSelectSuggestion:(NSString *)suggestion
 {
     self.searchBar.text = suggestion;
     [self.searchBar.delegate searchBar:self.searchBar textDidChange:self.searchBar.text];

@@ -72,4 +72,12 @@ MovieRegion const kMovieRegionHongKong = @"hk";
     }[region];
 }
 
++ (NSString *)shortNameOfRegion:(MovieRegion)region
+{
+    if ([region isEqual:kMovieRegionEnglish]) {
+        return @"English";
+    }
+    return [self nameOfRegion:region];
+}
+
 @end

@@ -16,7 +16,7 @@
     return [UIColor colorWithRed:0xa4/255.0 green:0x11/255.0 blue:0xcc/255.0 alpha:1];
 }
 
-+ (UIColor *)sectionHeaderColor
++ (UIColor *)sectionHeaderBackgroundColor
 {
     return [[self movieDictColor] colorWithAlphaComponent:0.9];
 }
@@ -27,8 +27,10 @@
     
     [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     [UINavigationBar appearance].barTintColor = [self movieDictColor];
-    [UINavigationBar appearance].titleTextAttributes = @{ NSForegroundColorAttributeName: [UIColor whiteColor] };
     [UINavigationBar appearance].barStyle = UIBarStyleBlackOpaque;
+    [UINavigationBar appearance].titleTextAttributes = @{
+        NSForegroundColorAttributeName: [UIColor whiteColor]
+    };
 }
 
 @end

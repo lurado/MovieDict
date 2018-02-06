@@ -128,7 +128,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
     label.frame = CGRectOffset(label.frame, 16, 0);
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [container addSubview:label];
-    container.backgroundColor = [Branding sectionHeaderColor];
+    container.backgroundColor = [Branding sectionHeaderBackgroundColor];
     
     return container;
 }

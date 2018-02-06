@@ -8,20 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
-@class SuggestionsView;
+@protocol SuggestionsViewDelegate;
+
+
+// A rectangular view that will regularly create moving, tappable SuggestionButtons.
+// When one of these buttons is tapped, the delegate is notified.
+@interface SuggestionsView : UIView
+
+@property (nullable, nonatomic, weak) IBOutlet id<SuggestionsViewDelegate> delegate;
+
+@end
 
 
 @protocol SuggestionsViewDelegate
 
-@required
-- (void)suggestionsView:(SuggestionsView *)suggestionsView didSelectSuggestion:(NSString *)suggestion;
+- (void)suggestionsViewDidSelectSuggestion:(NSString *)suggestion;
 
 @end
 
-
-@interface SuggestionsView : UIView
-
-@property (nonatomic, weak) IBOutlet id<SuggestionsViewDelegate> delegate;
-
-@end
+NS_ASSUME_NONNULL_END

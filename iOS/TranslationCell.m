@@ -23,22 +23,28 @@
 
 @implementation TranslationCell
 
-- (void)setupWithRegion:(NSString *)region title:(NSString *)title
+- (void)setupWithRegion:(MovieRegion)region title:(NSString *)title
 {
     self.regionLabel.textColor = [Branding movieDictColor];
     
-    // Skip everything after "International"
-    self.regionLabel.text = [[[Movie nameOfRegion:region] componentsSeparatedByString:@"/"] firstObject];
+    // Use the short name to make the caption fit on narrow iPhones.
+    self.regionLabel.text = [Movie shortNameOfRegion:region];
     
     NSString *romanization = [LanguageHelper romanizationForTitle:title region:region];
-    self.titleLabel.text = romanization.length ? [@[title, romanization] componentsJoinedByString:@"\n"] : title;
+    self.titleLabel.text = romanization
+                         ? [@[title, romanization] componentsJoinedByString:@"\n"]
+                         : title;
 
-    NSString *escapedTitle = [title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    self.plecoURL = [NSURL URLWithString:[NSString stringWithFormat:@"plecoapi://x-callback-url/s?q=%@&x-source=MovieDict", escapedTitle]];
+    NSCharacterSet *charSet = [NSCharacterSet URLQueryAllowedCharacterSet];
+    NSString *escapedTitle = [title stringByAddingPercentEncodingWithAllowedCharacters:charSet];
+    NSString *URLFormat = @"plecoapi://x-callback-url/s?q=%@&x-source=MovieDict";
+    self.plecoURL = [NSURL URLWithString:[NSString stringWithFormat:URLFormat, escapedTitle]];
     
-    if ([LanguageHelper isChineseTitle:title region:region] && [[UIApplication sharedApplication] canOpenURL:self.plecoURL]) {
+    if ([LanguageHelper isChineseTitle:title region:region]
+            && [[UIApplication sharedApplication] canOpenURL:self.plecoURL]) {
         self.plecoButton.backgroundColor = [UIColor clearColor];
-        [self.plecoButton setBackgroundImage:[self.class plecoButtonBackground] forState:UIControlStateNormal];
+        [self.plecoButton setBackgroundImage:[self.class plecoButtonBackground]
+                                    forState:UIControlStateNormal];
         self.plecoButton.hidden = NO;
     }
     else {
@@ -46,6 +52,7 @@
     }
 }
 
+/// A local helper that returns an UIImage background for a round button.
 + (UIImage *)plecoButtonBackground
 {
     static UIImage *image;
@@ -67,6 +74,5 @@
 {
     [[UIApplication sharedApplication] openURL:self.plecoURL];
 }
-
 
 @end
