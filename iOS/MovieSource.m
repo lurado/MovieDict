@@ -157,19 +157,24 @@ NSUInteger const kRegionShowMoreLimit = 250;
     NSString *englishTitle = movie.titles[kMovieRegionEnglish];
     
     cell.textLabel.text = movie.titles[results.region];
-    if (englishTitle == nil || results.region == kMovieRegionEnglish) {
-        cell.detailTextLabel.text = nil;
-    } else {
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"International title: %@",
-                                     englishTitle];
-    }
     
-    if (movie.year) {
-        if (cell.detailTextLabel.text.length == 0) {
+    // Determine what to do with the detailTextLabel.
+    if (englishTitle == nil || results.region == kMovieRegionEnglish) {
+        if (movie.year) {
+            // Don't show international title, but year.
             cell.detailTextLabel.text = [NSString stringWithFormat:@"(%@)", @(movie.year)];
         } else {
-            cell.detailTextLabel.text =
-                [cell.detailTextLabel.text stringByAppendingFormat:@" (%@)", @(movie.year)];
+            // Nothing to show.
+            cell.detailTextLabel.text = nil;
+        }
+    } else {
+        // International title...
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"International title: %@",
+                                     englishTitle];
+        if (movie.year) {
+            // ...plus optional year, with space between both strings.
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)",
+                                         cell.detailTextLabel.text, @(movie.year)];
         }
     }
     
