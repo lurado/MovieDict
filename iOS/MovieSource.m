@@ -170,8 +170,13 @@ NSUInteger const kRegionShowMoreLimit = 250;
     }
     
     if (movie.year) {
-        cell.detailTextLabel.text = [cell.detailTextLabel.text stringByAppendingFormat:@"(%@)",
-                                     @(movie.year)];
+        if (cell.detailTextLabel.text.length == 0) {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"(%@)", @(movie.year)];
+        }
+        else {
+            cell.detailTextLabel.text =
+                [cell.detailTextLabel.text stringByAppendingFormat:@" (%@)", @(movie.year)];
+        }
     }
     
     return cell;
