@@ -10,10 +10,6 @@
 #import "MovieViewController.h"
 
 
-@interface MoviesViewController () <MovieSourceDelegate>
-@end
-
-
 @implementation MoviesViewController
 
 - (void)setMovieSource:(MovieSource *)movieSource
@@ -35,7 +31,7 @@
 {
     if ([segue.identifier isEqual:@"showMovie"]) {
         UINavigationController *navigationController = segue.destinationViewController;
-        MovieViewController *destination = (id)navigationController.topViewController;
+        MovieViewController *destination = (id) navigationController.topViewController;
         destination.movie = sender;
         destination.currentKeyboardHeight = self.currentKeyboardHeight;
     }

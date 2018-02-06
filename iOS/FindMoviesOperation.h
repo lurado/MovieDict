@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic) MovieRegion region;
 
 /// The string to search for.
-@property (nullable, nonatomic, copy) NSString *query;
+@property (nullable, nonatomic, copy) NSString *searchText;
 
 /// After the operation has finished, this array will entries for each MovieRegion for which results
 /// could be found.

@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+/// The AppDelegate also directly sets up and controls the UISplitViewController in this app.
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UISplitViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @end
+
+NS_ASSUME_NONNULL_END

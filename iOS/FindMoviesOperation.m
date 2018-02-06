@@ -27,7 +27,7 @@
             return;
         }
         
-        MovieResults *resultsInRegion = [[MovieDatabase sharedDatabase] searchFor:self.query
+        MovieResults *resultsInRegion = [[MovieDatabase sharedDatabase] searchFor:self.searchText
                                                                          inRegion:region
                                                                             limit:self.regionLimit];
         if (resultsInRegion.movies.count > 0) {

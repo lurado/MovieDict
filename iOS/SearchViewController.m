@@ -13,7 +13,8 @@
 #import "SuggestionsView.h"
 
 
-@interface SearchViewController () <MovieSourceDelegate, SuggestionsViewDelegate>
+@interface SearchViewController () <UISearchBarDelegate, MovieSourceDelegate,
+                                    SuggestionsViewDelegate>
 
 @property (strong, nonatomic) IBOutlet MovieSource *movieSource;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -109,6 +110,19 @@
     }
 }
 
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    // This will start an asynchronous search for matching movies.
+    self.movieSource.searchText = searchText;
+}
+
 #pragma mark - MovieSourceDelegate
 
 - (void)movieSource:(MovieSource *)movieSource resultsHaveChanged:(BOOL)haveResults
@@ -116,7 +130,8 @@
     [self.tableView reloadData];
     [self.tableView scrollRectToVisible:CGRectMake(0, 0, 10, 10) animated:NO];
     
-    // TODO the right half of this condition should be moved into MovieSource
+    // If the user is currently searching (using self.searchBar), then hide the suggestions even if
+    // there are no search results right now.
     if (haveResults || self.searchBar.text.length > 0) {
         [self hideSuggestions];
     }
@@ -128,10 +143,11 @@
 - (void)hideSuggestions
 {
     self.suggestionsView.hidden = NO;
-    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    NSUInteger options = UIViewAnimationOptionBeginFromCurrentState;
+    [UIView animateWithDuration:0.2 delay:0.0 options:options animations:^{
         self.suggestionsView.alpha = 0;
     } completion:^(BOOL finished) {
-        // Note: "finished" is "YES" even when the animation was cancelled
+        // Note: "finished" is YES even when the animation was cancelled.
         if (self.suggestionsView.alpha == 0) {
             self.suggestionsView.hidden = YES;
         }
@@ -141,7 +157,8 @@
 - (void)showSuggestions
 {
     self.suggestionsView.hidden = NO;
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    NSUInteger options = UIViewAnimationOptionBeginFromCurrentState;
+    [UIView animateWithDuration:0.3 delay:0.0 options:options animations:^{
         self.suggestionsView.alpha = 1;
     } completion:nil];
 }
@@ -161,7 +178,8 @@
 - (void)suggestionsViewDidSelectSuggestion:(NSString *)suggestion
 {
     self.searchBar.text = suggestion;
-    [self.searchBar.delegate searchBar:self.searchBar textDidChange:self.searchBar.text];
+    // Trigger a search programmatically if the user taps a suggestion.
+    [self searchBar:self.searchBar textDidChange:suggestion];
 }
 
 @end

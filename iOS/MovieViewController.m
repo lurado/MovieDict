@@ -23,26 +23,27 @@
 
 @implementation MovieViewController
 
-#pragma mark - Managing the detail item
-
 - (void)setMovie:(Movie *)movie
 {
-    if (_movie != movie) {
-        _movie = movie;
-        
-        NSMutableArray<MovieRegion> *regions = [NSMutableArray new];
-        for (MovieRegion region in [Movie allRegions]) {
-            if (movie.titles[region]) {
-                [regions addObject:region];
-            }
-        }
-        self.regions = regions;
-        
-        self.imdbButton.hidden = (movie.imdbURL == nil);
-        self.wikipediaButton.hidden = (movie.wikipediaURL == nil);
-        
-        [self.tableView reloadData];
+    // Avoid reloading information about the same movie - this can happen in split-screen mode.
+    if (_movie == movie) {
+        return;
     }
+    
+    _movie = movie;
+    
+    NSMutableArray<MovieRegion> *regions = [NSMutableArray new];
+    for (MovieRegion region in [Movie allRegions]) {
+        if (movie.titles[region]) {
+            [regions addObject:region];
+        }
+    }
+    self.regions = regions;
+    
+    self.imdbButton.hidden = (movie.imdbURL == nil);
+    self.wikipediaButton.hidden = (movie.wikipediaURL == nil);
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - UIViewController
@@ -77,11 +78,14 @@
     self.wikipediaButton.hidden = (self.movie.wikipediaURL == nil);
 }
 
+#pragma mark - Adjusting the bottom inset
+
 - (void)adjustInsets:(NSNotification *)notification
 {
     NSValue *frameValue = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
     if (frameValue) {
-        CGRect keyboardFrame = [self.view convertRect:frameValue.CGRectValue fromView:self.view.window];
+        CGRect keyboardFrame = [self.view convertRect:frameValue.CGRectValue
+                                             fromView:self.view.window];
         self.currentKeyboardHeight = self.view.bounds.size.height - CGRectGetMinY(keyboardFrame);
     }
 }
@@ -106,7 +110,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MovieRegion region = self.regions[indexPath.row];
-    TranslationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Translation" forIndexPath:indexPath];
+    TranslationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Translation"
+                                                            forIndexPath:indexPath];
     [cell setupWithRegion:region title:self.movie.titles[region]];
     return cell;
 }

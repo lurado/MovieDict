@@ -12,8 +12,13 @@
 #import "Branding.h"
 
 
+/// Max. number of search results per region in an all-region search.
 NSUInteger const kRegionLimit = 20;
+
+/// Max. number of search results across all regions in an all-region search.
 NSUInteger const kTotalLimit = 50;
+
+/// Max. number of search results in a single-region search.
 NSUInteger const kRegionShowMoreLimit = 250;
 
 
@@ -21,8 +26,8 @@ NSUInteger const kRegionShowMoreLimit = 250;
 
 @property (nonatomic, copy) MovieRegion region;
 @property (nonatomic) NSOperationQueue *searchQueue;
-@property (atomic, copy) NSString *currentQuery;
-@property (atomic, copy) NSString *finishedQuery;
+@property (atomic, copy) NSString *currentSearchText;
+@property (atomic, copy) NSString *finishedSearchText;
 @property (nonatomic, copy) NSArray<MovieResults *> *results;
 
 @end
@@ -30,7 +35,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
 
 @implementation MovieSource
 
-- (id)init
+- (instancetype)init
 {
     if (self = [super init]) {
         self.searchQueue = [NSOperationQueue new];
@@ -43,8 +48,8 @@ NSUInteger const kRegionShowMoreLimit = 250;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (self.results == nil && self.finishedQuery.length > 0) {
-        // "No results" cell
+    if (self.results == nil && self.finishedSearchText.length > 0) {
+        // Single section with single "no results" cell.
         return 1;
     }
     else {
@@ -54,54 +59,50 @@ NSUInteger const kRegionShowMoreLimit = 250;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.results == nil && self.finishedQuery.length > 0) {
-        // "No results" cell
+    if (self.results == nil && self.finishedSearchText.length > 0) {
+        // "No results" cell.
         return 1;
     }
     else {
         MovieResults *resultsForRegion = self.results[section];
+        // +1 for "more results from this region" cell.
         return resultsForRegion.movies.count + (resultsForRegion.haveMore ? 1 : 0);
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.results == nil && self.finishedQuery.length > 0) {
+    if (self.results == nil && self.finishedSearchText.length > 0) {
         // "No results" cell
         return [self noResultsCellInTableView:tableView];
     }
     else if (indexPath.row >= self.results[indexPath.section].movies.count) {
         if (self.region == nil) {
-            return [self showMoreResultsCellForRegion:[Movie allRegions][indexPath.section] inTableView:tableView];
+            // If we are showing movies from all regions, let the user drill down into every region
+            // which has more movies available:
+            return [self showMoreResultsCellForRegion:self.results[indexPath.section].region
+                                          inTableView:tableView];
         }
         else {
+            // If the user has already filtered by region, we can't drill down any further:
             return [self tooManyResultsCellInTableView:tableView];
         }
     }
-    else {
-        return [self cellForMovieInTableView:tableView indexPath:indexPath];
-    }
-}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if ([self tableView:tableView titleForHeaderInSection:section]) {
-        return 20.0;
-    }
-    else {
-        return 0.0;
-    }
+    // The boring default case: A search result!
+    return [self cellForMovieInTableView:tableView indexPath:indexPath];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (self.results == nil || self.results[section].movies.count == 0) {
-        // "No results" cell, or no movies found for this region
+    if (self.results == nil) {
+        // The "no results" cell does not have a header.
         return nil;
     }
     
     if (self.region != nil) {
-        // If this MovieSource targets a specific region, then we don't need headers
+        // If this MovieSource targets a specific region, then we don't need headers at all.
         return nil;
     }
     
@@ -109,11 +110,21 @@ NSUInteger const kRegionShowMoreLimit = 250;
     return [[Movie nameOfRegion:region] stringByAppendingString:@" movie titles"];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if ([self tableView:tableView titleForHeaderInSection:section] == nil) {
+        return 0.0;
+    }
+
+    // Enough vertical place for the view returned by tableView:viewForHeaderInSection:
+    return 20.0;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSString *title = [self tableView:tableView titleForHeaderInSection:section];
     if (title == nil) {
-        // "No results" cell, or no movies found for this region
+        // The "no results" cell does not have a header.
         return nil;
     }
     
@@ -133,13 +144,16 @@ NSUInteger const kRegionShowMoreLimit = 250;
     return container;
 }
 
-- (UITableViewCell *)cellForMovieInTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)cellForMovieInTableView:(UITableView *)tableView
+                                   indexPath:(NSIndexPath *)indexPath
 {
+    // Only cells created by this method can be recycled in this method.
     NSString *identifier = NSStringFromSelector(_cmd);
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:identifier];
     }
     
     MovieResults *results = self.results[indexPath.section];
@@ -148,13 +162,16 @@ NSUInteger const kRegionShowMoreLimit = 250;
     
     cell.textLabel.text = movie.titles[results.region];
     if (englishTitle == nil || results.region == kMovieRegionEnglish) {
-        cell.detailTextLabel.text = @"";
+        cell.detailTextLabel.text = nil;
     }
     else {
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"International title: %@ ", englishTitle];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"International title: %@",
+                                     englishTitle];
     }
+    
     if (movie.year) {
-        cell.detailTextLabel.text = [cell.detailTextLabel.text stringByAppendingFormat:@"(%@)", @(movie.year)];
+        cell.detailTextLabel.text = [cell.detailTextLabel.text stringByAppendingFormat:@"(%@)",
+                                     @(movie.year)];
     }
     
     return cell;
@@ -162,11 +179,13 @@ NSUInteger const kRegionShowMoreLimit = 250;
 
 - (UITableViewCell *)noResultsCellInTableView:(UITableView *)tableView
 {
+    // Only cells created by this method can be recycled in this method.
     NSString *identifier = NSStringFromSelector(_cmd);
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:identifier];
         cell.textLabel.textColor = cell.detailTextLabel.textColor = [UIColor grayColor];
         cell.textLabel.text = @"No results.";
         cell.detailTextLabel.text = @"Please try different search terms.";
@@ -177,11 +196,13 @@ NSUInteger const kRegionShowMoreLimit = 250;
 
 - (UITableViewCell *)tooManyResultsCellInTableView:(UITableView *)tableView
 {
+    // Only cells created by this method can be recycled in this method.
     NSString *identifier = NSStringFromSelector(_cmd);
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:identifier];
         cell.textLabel.textColor = cell.detailTextLabel.textColor = [UIColor grayColor];
         cell.textLabel.text = @"Too many results.";
         cell.detailTextLabel.text = @"Please refine your search terms.";
@@ -192,15 +213,18 @@ NSUInteger const kRegionShowMoreLimit = 250;
 
 - (UITableViewCell *)showMoreResultsCellForRegion:(MovieRegion)region inTableView:(UITableView *)tableView
 {
+    // Only cells created by this method can be recycled in this method.
     NSString *identifier = NSStringFromSelector(_cmd);
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:identifier];
         cell.textLabel.textColor = [UIColor grayColor];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"More %@ results", [Movie nameOfRegion:region]];
+    cell.textLabel.text = [NSString stringWithFormat:@"More %@ results",
+                           [Movie shortNameOfRegion:region]];
     return cell;
 }
 
@@ -213,42 +237,29 @@ NSUInteger const kRegionShowMoreLimit = 250;
         [self.delegate movieSource:self didSelectMovie:results.movies[indexPath.row]];
     }
     else if ([self.delegate respondsToSelector:@selector(movieSource:didSelectRegion:)]) {
-        [self.delegate movieSource:self didSelectRegion:[Movie allRegions][indexPath.section]];
-    }
-}
-
-
-#pragma mark - UISearchBarDelegate
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    [searchBar resignFirstResponder];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    if (searchText.length == 0) {
-        self.currentQuery = nil;
-        self.finishedQuery = nil;
-        [self.delegate movieSource:self resultsHaveChanged:NO];
-    }
-    else {
-        [self startSearchingFor:searchText];
+        [self.delegate movieSource:self didSelectRegion:results.region];
     }
 }
 
 #pragma mark - Asynchronous searching
 
-- (void)startSearchingFor:(NSString *)query
+- (void)setSearchText:(NSString *)searchText
 {
-    self.currentQuery = query;
+    if (searchText.length == 0) {
+        self.currentSearchText = nil;
+        self.finishedSearchText = nil;
+        [self.delegate movieSource:self resultsHaveChanged:NO];
+        return;
+    }
+
+    self.currentSearchText = searchText;
     
     [self.searchQueue cancelAllOperations];
     
     FindMoviesOperation *operation = [FindMoviesOperation new];
     operation.regionLimit = kRegionLimit;
     operation.totalLimit = kTotalLimit;
-    operation.query = query;
+    operation.searchText = searchText;
     
     FindMoviesOperation __weak *weakOperation = operation;
     operation.completionBlock = ^{
@@ -267,8 +278,8 @@ NSUInteger const kRegionShowMoreLimit = 250;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         // If these results are still what the user is looking for, let our delegate know:
-        if ([self.currentQuery isEqual:operation.query]) {
-            self.finishedQuery = operation.query;
+        if ([self.currentSearchText isEqual:operation.searchText]) {
+            self.finishedSearchText = operation.searchText;
             self.results = operation.results;
             BOOL haveMovies = (self.results != nil);
             [self.delegate movieSource:self resultsHaveChanged:haveMovies];
@@ -281,13 +292,13 @@ NSUInteger const kRegionShowMoreLimit = 250;
 - (instancetype)movieSourceForSingleRegion:(MovieRegion)region
 {
     MovieSource *source = [MovieSource new];
-    source.currentQuery = self.finishedQuery;
+    source.currentSearchText = self.finishedSearchText;
     source.region = region;
 
     FindMoviesOperation *operation = [FindMoviesOperation new];
     operation.regionLimit = operation.totalLimit = kRegionShowMoreLimit;
     operation.region = region;
-    operation.query = source.currentQuery;
+    operation.searchText = source.currentSearchText;
     
     FindMoviesOperation __weak *weakOperation = operation;
     operation.completionBlock = ^{
