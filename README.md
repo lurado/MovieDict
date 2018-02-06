@@ -4,7 +4,7 @@
 
 ![Screenshot](https://moviedict.info/iphone.png)
 
-An app for travelers, language learners and bilingual couples who like to talk about their favourite films.
+An app for travelers and language learners who like to talk about their favorite films.
 [Check out the homepage](https://moviedict.info) for a little blurb about the project.
 
 ## How does it work?
@@ -15,12 +15,11 @@ This (multi-)weekend project transforms a Wikipedia dump into a tiny SQLite file
 
 ## Why not use IMDb?
 
-IMDb does not support Chinese or Japanese characters (among others), and is not available offline (when traveling).
+IMDb does not support Chinese or Japanese characters (among others), and is not available offline.
 
 ## Building the database
 
-* The database building is being rewritten to happen in-memory (without downloading large wiki dumps). See https://github.com/lurado/MovieDict/issues/14
-* Then take a look at the `Rakefile`. There is a task that will run the full process, but manually running things step-by-step while reading the Ruby scripts is the recommended workflow.
+Take a look at the `Rakefile`. There is a task that will run the full process, but manually running things step-by-step while reading the Ruby scripts is the recommended workflow.
 
 ## License
 
