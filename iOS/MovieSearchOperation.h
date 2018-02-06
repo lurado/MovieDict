@@ -1,5 +1,5 @@
 //
-//  FindMoviesOperation.h
+//  MovieSearchOperation.h
 //  MovieDict
 //
 //  Created by Julian Raschke on 31.05.15.
@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// This operation wraps the synchronous database search found in the Movie class.
-@interface FindMoviesOperation : NSOperation
+@interface MovieSearchOperation : NSOperation
 
 /// The maximum number of results per region.
 @property (nonatomic) NSInteger regionLimit;

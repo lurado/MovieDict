@@ -1,16 +1,16 @@
 //
-//  FindMoviesOperation.m
+//  MovieSearchOperation.m
 //  MovieDict
 //
 //  Created by Julian Raschke on 31.05.15.
 //  Copyright (c) 2015 Julian Raschke. All rights reserved.
 //
 
-#import "FindMoviesOperation.h"
+#import "MovieSearchOperation.h"
 #import "MovieDatabase.h"
 
 
-@implementation FindMoviesOperation
+@implementation MovieSearchOperation
 {
     NSMutableArray<MovieResults *> *_results;
 }

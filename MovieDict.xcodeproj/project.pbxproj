@@ -24,7 +24,7 @@
 		D4362DAD1A4AEF2300988604 /* MovieSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D4362DAC1A4AEF2300988604 /* MovieSource.m */; };
 		D4398A342029B2BF0098F18C /* MovieDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D4398A332029B2BF0098F18C /* MovieDatabase.m */; };
 		D444944717EDEA5C0096147B /* LanguageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D444944617EDEA5C0096147B /* LanguageHelper.m */; };
-		D479D2AC1B1B19A000F67DEF /* FindMoviesOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D479D2AB1B1B19A000F67DEF /* FindMoviesOperation.m */; };
+		D479D2AC1B1B19A000F67DEF /* MovieSearchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D479D2AB1B1B19A000F67DEF /* MovieSearchOperation.m */; };
 		D4C6C5CB1D327734008CE482 /* Branding.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C6C5CA1D327734008CE482 /* Branding.m */; };
 		D4C6C5CE1D328450008CE482 /* SuggestionsButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C6C5CD1D328450008CE482 /* SuggestionsButton.m */; };
 		D4C865451A311763002891DB /* Movies.db in Resources */ = {isa = PBXBuildFile; fileRef = D4C865441A311763002891DB /* Movies.db */; };
@@ -67,8 +67,8 @@
 		D4398A332029B2BF0098F18C /* MovieDatabase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieDatabase.m; sourceTree = "<group>"; };
 		D444944517EDEA5C0096147B /* LanguageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageHelper.h; sourceTree = "<group>"; };
 		D444944617EDEA5C0096147B /* LanguageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageHelper.m; sourceTree = "<group>"; };
-		D479D2AA1B1B19A000F67DEF /* FindMoviesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindMoviesOperation.h; sourceTree = "<group>"; };
-		D479D2AB1B1B19A000F67DEF /* FindMoviesOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindMoviesOperation.m; sourceTree = "<group>"; };
+		D479D2AA1B1B19A000F67DEF /* MovieSearchOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieSearchOperation.h; sourceTree = "<group>"; };
+		D479D2AB1B1B19A000F67DEF /* MovieSearchOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieSearchOperation.m; sourceTree = "<group>"; };
 		D4C6C5C91D327734008CE482 /* Branding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Branding.h; sourceTree = "<group>"; };
 		D4C6C5CA1D327734008CE482 /* Branding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Branding.m; sourceTree = "<group>"; };
 		D4C6C5CC1D328450008CE482 /* SuggestionsButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestionsButton.h; sourceTree = "<group>"; };
@@ -148,16 +148,16 @@
 		D4362DA11A4ADA4200988604 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D479D2AA1B1B19A000F67DEF /* FindMoviesOperation.h */,
-				D479D2AB1B1B19A000F67DEF /* FindMoviesOperation.m */,
 				D444944517EDEA5C0096147B /* LanguageHelper.h */,
 				D444944617EDEA5C0096147B /* LanguageHelper.m */,
 				D42969AC17E9CA5E00BCD8AA /* Movie.h */,
 				D42969AD17E9CA5E00BCD8AA /* Movie.m */,
-				D41A6D3D1D3BD3E500A5680C /* MovieResults.h */,
-				D41A6D3E1D3BD3E500A5680C /* MovieResults.m */,
 				D4398A322029B2BF0098F18C /* MovieDatabase.h */,
 				D4398A332029B2BF0098F18C /* MovieDatabase.m */,
+				D41A6D3D1D3BD3E500A5680C /* MovieResults.h */,
+				D41A6D3E1D3BD3E500A5680C /* MovieResults.m */,
+				D479D2AA1B1B19A000F67DEF /* MovieSearchOperation.h */,
+				D479D2AB1B1B19A000F67DEF /* MovieSearchOperation.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -344,7 +344,7 @@
 				D444944717EDEA5C0096147B /* LanguageHelper.m in Sources */,
 				D40838D21A4798F8004BE0D9 /* FMDatabase.m in Sources */,
 				D4C6C5CE1D328450008CE482 /* SuggestionsButton.m in Sources */,
-				D479D2AC1B1B19A000F67DEF /* FindMoviesOperation.m in Sources */,
+				D479D2AC1B1B19A000F67DEF /* MovieSearchOperation.m in Sources */,
 				D4FA62041D8D85FD0071B81B /* TranslationCell.m in Sources */,
 				D40838D41A4798F8004BE0D9 /* FMDatabasePool.m in Sources */,
 				D4398A342029B2BF0098F18C /* MovieDatabase.m in Sources */,

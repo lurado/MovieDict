@@ -8,7 +8,7 @@
 
 #import "MovieSource.h"
 #import "Movie.h"
-#import "FindMoviesOperation.h"
+#import "MovieSearchOperation.h"
 #import "Branding.h"
 
 
@@ -259,20 +259,20 @@ NSUInteger const kRegionShowMoreLimit = 250;
     
     [self.searchQueue cancelAllOperations];
     
-    FindMoviesOperation *operation = [FindMoviesOperation new];
+    MovieSearchOperation *operation = [MovieSearchOperation new];
     operation.regionLimit = kRegionLimit;
     operation.totalLimit = kTotalLimit;
     operation.searchText = searchText;
     
-    FindMoviesOperation __weak *weakOperation = operation;
+    MovieSearchOperation __weak *weakOperation = operation;
     operation.completionBlock = ^{
-        [self findMoviesOperationDidFinish:weakOperation];
+        [self movieSearchOperationDidFinish:weakOperation];
     };
     
     [self.searchQueue addOperation:operation];
 }
 
-- (void)findMoviesOperationDidFinish:(FindMoviesOperation *)operation
+- (void)movieSearchOperationDidFinish:(MovieSearchOperation *)operation
 {
     // Ignore cancelled operations as they might have inconsistent results.
     if (operation.cancelled) {
@@ -298,14 +298,14 @@ NSUInteger const kRegionShowMoreLimit = 250;
     source.currentSearchText = self.finishedSearchText;
     source.region = region;
 
-    FindMoviesOperation *operation = [FindMoviesOperation new];
+    MovieSearchOperation *operation = [MovieSearchOperation new];
     operation.regionLimit = operation.totalLimit = kRegionShowMoreLimit;
     operation.region = region;
     operation.searchText = source.currentSearchText;
     
-    FindMoviesOperation __weak *weakOperation = operation;
+    MovieSearchOperation __weak *weakOperation = operation;
     operation.completionBlock = ^{
-        [source findMoviesOperationDidFinish:weakOperation];
+        [source movieSearchOperationDidFinish:weakOperation];
     };
     
     [source.searchQueue addOperation:operation];
