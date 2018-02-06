@@ -12,7 +12,7 @@
 		D40838D41A4798F8004BE0D9 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = D40838CC1A4798F8004BE0D9 /* FMDatabasePool.m */; };
 		D40838D51A4798F8004BE0D9 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D40838CE1A4798F8004BE0D9 /* FMDatabaseQueue.m */; };
 		D40838D61A4798F8004BE0D9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D40838D11A4798F8004BE0D9 /* FMResultSet.m */; };
-		D40838DB1A479953004BE0D9 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = D40838D91A479953004BE0D9 /* sqlite3.c */; };
+		D40838DB1A479953004BE0D9 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = D40838D91A479953004BE0D9 /* sqlite3.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		D41A6D3F1D3BD3E500A5680C /* MovieResults.m in Sources */ = {isa = PBXBuildFile; fileRef = D41A6D3E1D3BD3E500A5680C /* MovieResults.m */; };
 		D41A6D421D3BF8F200A5680C /* MoviesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41A6D411D3BF8F200A5680C /* MoviesViewController.m */; };
 		D42969AE17E9CA5E00BCD8AA /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = D42969AD17E9CA5E00BCD8AA /* Movie.m */; };
