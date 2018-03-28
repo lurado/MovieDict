@@ -66,7 +66,6 @@
 
 - (NSArray<MovieResults *> *)results
 {
-    NSAssert(! self.cancelled, @"must not call .results on cancelled operation");
     NSAssert(_results != nil, @"finished operation must have at least an empty results array");
     
     return _results;
