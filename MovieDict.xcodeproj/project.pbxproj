@@ -7,12 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D40838D21A4798F8004BE0D9 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D40838C81A4798F8004BE0D9 /* FMDatabase.m */; };
-		D40838D31A4798F8004BE0D9 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D40838CA1A4798F8004BE0D9 /* FMDatabaseAdditions.m */; };
-		D40838D41A4798F8004BE0D9 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = D40838CC1A4798F8004BE0D9 /* FMDatabasePool.m */; };
-		D40838D51A4798F8004BE0D9 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D40838CE1A4798F8004BE0D9 /* FMDatabaseQueue.m */; };
-		D40838D61A4798F8004BE0D9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D40838D11A4798F8004BE0D9 /* FMResultSet.m */; };
-		D40838DB1A479953004BE0D9 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = D40838D91A479953004BE0D9 /* sqlite3.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		0C36A51639EF9DB819C0C2CE /* libPods-MovieDict.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B28931B92F680D33870FEF5 /* libPods-MovieDict.a */; };
 		D41A6D3F1D3BD3E500A5680C /* MovieResults.m in Sources */ = {isa = PBXBuildFile; fileRef = D41A6D3E1D3BD3E500A5680C /* MovieResults.m */; };
 		D41A6D421D3BF8F200A5680C /* MoviesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41A6D411D3BF8F200A5680C /* MoviesViewController.m */; };
 		D42969AE17E9CA5E00BCD8AA /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = D42969AD17E9CA5E00BCD8AA /* Movie.m */; };
@@ -39,19 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D40838C71A4798F8004BE0D9 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = FMDB/FMDatabase.h; sourceTree = "<group>"; };
-		D40838C81A4798F8004BE0D9 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = FMDB/FMDatabase.m; sourceTree = "<group>"; };
-		D40838C91A4798F8004BE0D9 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = FMDB/FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		D40838CA1A4798F8004BE0D9 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = FMDB/FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		D40838CB1A4798F8004BE0D9 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = FMDB/FMDatabasePool.h; sourceTree = "<group>"; };
-		D40838CC1A4798F8004BE0D9 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = FMDB/FMDatabasePool.m; sourceTree = "<group>"; };
-		D40838CD1A4798F8004BE0D9 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = FMDB/FMDatabaseQueue.h; sourceTree = "<group>"; };
-		D40838CE1A4798F8004BE0D9 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = FMDB/FMDatabaseQueue.m; sourceTree = "<group>"; };
-		D40838CF1A4798F8004BE0D9 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = FMDB/FMDB.h; sourceTree = "<group>"; };
-		D40838D01A4798F8004BE0D9 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = FMDB/FMResultSet.h; sourceTree = "<group>"; };
-		D40838D11A4798F8004BE0D9 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = FMDB/FMResultSet.m; sourceTree = "<group>"; };
-		D40838D91A479953004BE0D9 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sqlite3.c; path = SQLite/sqlite3.c; sourceTree = "<group>"; };
-		D40838DA1A479953004BE0D9 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = SQLite/sqlite3.h; sourceTree = "<group>"; };
+		0B28931B92F680D33870FEF5 /* libPods-MovieDict.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MovieDict.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DC8B6C74EDC06BC9CF61FC9 /* Pods-MovieDict.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDict.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieDict/Pods-MovieDict.debug.xcconfig"; sourceTree = "<group>"; };
 		D41A6D3D1D3BD3E500A5680C /* MovieResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieResults.h; sourceTree = "<group>"; };
 		D41A6D3E1D3BD3E500A5680C /* MovieResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieResults.m; sourceTree = "<group>"; };
 		D41A6D401D3BF8F200A5680C /* MoviesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviesViewController.h; sourceTree = "<group>"; };
@@ -91,6 +75,7 @@
 		D4FA62001D8D66580071B81B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D4FA62021D8D85FD0071B81B /* TranslationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslationCell.h; sourceTree = "<group>"; };
 		D4FA62031D8D85FD0071B81B /* TranslationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranslationCell.m; sourceTree = "<group>"; };
+		E97AF3F7880CE2BEA7F5F884 /* Pods-MovieDict.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDict.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieDict/Pods-MovieDict.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,48 +86,20 @@
 				D4362DA61A4AE23E00988604 /* CoreGraphics.framework in Frameworks */,
 				D4362DA41A4AE23B00988604 /* UIKit.framework in Frameworks */,
 				D4362DA51A4AE23E00988604 /* Foundation.framework in Frameworks */,
+				0C36A51639EF9DB819C0C2CE /* libPods-MovieDict.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D40838C61A4798E8004BE0D9 /* FMDB */ = {
+		02A778B8E0BD473886B01D16 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D40838C71A4798F8004BE0D9 /* FMDatabase.h */,
-				D40838C81A4798F8004BE0D9 /* FMDatabase.m */,
-				D40838C91A4798F8004BE0D9 /* FMDatabaseAdditions.h */,
-				D40838CA1A4798F8004BE0D9 /* FMDatabaseAdditions.m */,
-				D40838CB1A4798F8004BE0D9 /* FMDatabasePool.h */,
-				D40838CC1A4798F8004BE0D9 /* FMDatabasePool.m */,
-				D40838CD1A4798F8004BE0D9 /* FMDatabaseQueue.h */,
-				D40838CE1A4798F8004BE0D9 /* FMDatabaseQueue.m */,
-				D40838CF1A4798F8004BE0D9 /* FMDB.h */,
-				D40838D01A4798F8004BE0D9 /* FMResultSet.h */,
-				D40838D11A4798F8004BE0D9 /* FMResultSet.m */,
+				2DC8B6C74EDC06BC9CF61FC9 /* Pods-MovieDict.debug.xcconfig */,
+				E97AF3F7880CE2BEA7F5F884 /* Pods-MovieDict.release.xcconfig */,
 			);
-			name = FMDB;
-			path = iOS;
-			sourceTree = "<group>";
-		};
-		D40838D71A4798FB004BE0D9 /* SQLite */ = {
-			isa = PBXGroup;
-			children = (
-				D40838D91A479953004BE0D9 /* sqlite3.c */,
-				D40838DA1A479953004BE0D9 /* sqlite3.h */,
-			);
-			name = SQLite;
-			path = iOS;
-			sourceTree = "<group>";
-		};
-		D40838D81A47990A004BE0D9 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				D40838C61A4798E8004BE0D9 /* FMDB */,
-				D40838D71A4798FB004BE0D9 /* SQLite */,
-			);
-			name = Dependencies;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		D4362DA11A4ADA4200988604 /* Model */ = {
@@ -199,9 +156,9 @@
 			isa = PBXGroup;
 			children = (
 				D4E5B90317E85B4400C77D46 /* MovieDict */,
-				D40838D81A47990A004BE0D9 /* Dependencies */,
 				D4E5B8FC17E85B4400C77D46 /* Frameworks */,
 				D4E5B8FB17E85B4400C77D46 /* Products */,
+				02A778B8E0BD473886B01D16 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -219,6 +176,7 @@
 				D4E5B8FD17E85B4400C77D46 /* Foundation.framework */,
 				D4E5B8FF17E85B4400C77D46 /* CoreGraphics.framework */,
 				D4E5B90117E85B4400C77D46 /* UIKit.framework */,
+				0B28931B92F680D33870FEF5 /* libPods-MovieDict.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -255,10 +213,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4E5B93217E85B4400C77D46 /* Build configuration list for PBXNativeTarget "MovieDict" */;
 			buildPhases = (
+				449F9B14F478E8A4503F0A22 /* [CP] Check Pods Manifest.lock */,
 				D4E5B8F617E85B4400C77D46 /* Sources */,
 				D4E5B8F717E85B4400C77D46 /* Frameworks */,
 				D4E5B8F817E85B4400C77D46 /* Resources */,
 				D4C865461A311A04002891DB /* ShellScript */,
+				2B4C8E1BECEBB770C7818759 /* [CP] Embed Pods Frameworks */,
+				585B58225F7A8C5425F138D8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -318,6 +279,54 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2B4C8E1BECEBB770C7818759 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieDict/Pods-MovieDict-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		449F9B14F478E8A4503F0A22 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MovieDict-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		585B58225F7A8C5425F138D8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieDict/Pods-MovieDict-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D4C865461A311A04002891DB /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -342,23 +351,17 @@
 				D4362DA91A4AEC2B00988604 /* SuggestionsView.m in Sources */,
 				D4E5B91717E85B4400C77D46 /* SearchViewController.m in Sources */,
 				D444944717EDEA5C0096147B /* LanguageHelper.m in Sources */,
-				D40838D21A4798F8004BE0D9 /* FMDatabase.m in Sources */,
 				D4C6C5CE1D328450008CE482 /* SuggestionsButton.m in Sources */,
 				D479D2AC1B1B19A000F67DEF /* MovieSearchOperation.m in Sources */,
 				D4FA62041D8D85FD0071B81B /* TranslationCell.m in Sources */,
-				D40838D41A4798F8004BE0D9 /* FMDatabasePool.m in Sources */,
 				D4398A342029B2BF0098F18C /* MovieDatabase.m in Sources */,
-				D40838D51A4798F8004BE0D9 /* FMDatabaseQueue.m in Sources */,
 				D41A6D3F1D3BD3E500A5680C /* MovieResults.m in Sources */,
 				D42969AE17E9CA5E00BCD8AA /* Movie.m in Sources */,
-				D40838DB1A479953004BE0D9 /* sqlite3.c in Sources */,
 				D4C6C5CB1D327734008CE482 /* Branding.m in Sources */,
 				D4E5B90A17E85B4400C77D46 /* main.m in Sources */,
-				D40838D61A4798F8004BE0D9 /* FMResultSet.m in Sources */,
 				D4E5B91A17E85B4400C77D46 /* MovieViewController.m in Sources */,
 				D4362DAD1A4AEF2300988604 /* MovieSource.m in Sources */,
 				D41A6D421D3BF8F200A5680C /* MoviesViewController.m in Sources */,
-				D40838D31A4798F8004BE0D9 /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,7 +424,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -462,13 +464,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		D4E5B93317E85B4400C77D46 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DC8B6C74EDC06BC9CF61FC9 /* Pods-MovieDict.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -490,6 +492,7 @@
 		};
 		D4E5B93417E85B4400C77D46 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E97AF3F7880CE2BEA7F5F884 /* Pods-MovieDict.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";

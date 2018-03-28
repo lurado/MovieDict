@@ -94,7 +94,7 @@
             // This outer SQL query orders and limits search results.
             // When ordering, prefer short matches (= query is a higher percentage of the title)
             // and new movies.
-            NSString *query = @"SELECT * FROM movies WHERE id in (%@)"
+            NSString *query = @"SELECT * FROM movies WHERE id in (%@) "
                                "ORDER BY LENGTH(%@) ASC, year DESC LIMIT (?)";
             NSString *SQL = [NSString stringWithFormat:query, ftsSQL, region];
             
@@ -106,7 +106,7 @@
 
             // When there is no FTS table, just perform a standard SQL LIKE search.
             // The ORDER part here must be kept in sync with the if() branch above for consistency.
-            NSString *query = @"SELECT * FROM movies WHERE %@ LIKE (?)"
+            NSString *query = @"SELECT * FROM movies WHERE %@ LIKE (?) "
                                "ORDER BY LENGTH(%@) ASC, year DESC LIMIT (?)";
             NSString *SQL = [NSString stringWithFormat:query, region, region];
             NSString *searchPattern = [NSString stringWithFormat:@"%%%@%%", safeString];
