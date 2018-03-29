@@ -83,12 +83,15 @@
         // Dynamically use SQLite's full-text search if the corresponding table exists.
         if ([db tableExists:[@"fts_" stringByAppendingString:region]]) {
             NSString *safeString = string;
+            // Escape the search query before passing it to SQLite:
+            // https://www.sqlite.org/fts5.html#fts5_strings
             safeString = [safeString stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
+            safeString = [safeString stringByReplacingOccurrencesOfString:@"\"" withString:@"\"\""];
             safeString = [safeString stringByReplacingOccurrencesOfString:@"*" withString:@"**"];
             
-            // This inner SQL query will find matching movie "docids" (movies.id) using full-text
+            // This inner SQL query will find matching movie "rowids" (movies.id) using full-text
             // search.
-            NSString *ftsQuery = @"SELECT docid FROM fts_%@ WHERE %@ MATCH '\"%@*\"'";
+            NSString *ftsQuery = @"SELECT rowid FROM fts_%@ WHERE %@ MATCH '\"%@\" *'";
             NSString *ftsSQL = [NSString stringWithFormat:ftsQuery, region, region, safeString];
             
             // This outer SQL query orders and limits search results.

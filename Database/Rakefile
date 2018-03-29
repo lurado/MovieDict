@@ -34,7 +34,7 @@ require_relative 'fts'
 
 
 def sqlite_cli(command, output = nil)
-  system "/usr/local/opt/sqlite/bin/sqlite3 Movies.db -csv -header #{Shellwords.escape command} #{output}"
+  system "/usr/bin/sqlite3 Movies.db -csv -header #{Shellwords.escape command} #{output}"
 end
 
 

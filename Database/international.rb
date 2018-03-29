@@ -6,7 +6,7 @@ end
 
 desc "Adds translations from the langlinks table to Movies.db"
 task :add_translations => :database do
-  mysql = Mysql2::Client.new(:host => "localhost", :username => "root", :database => "langlinks")
+  mysql = Mysql2::Client.new(host: "localhost", username: "root", database: "langlinks")
   
   languages_to_query = LANGUAGES - CHINESE_VARIANTS
   $db.execute("SELECT id, en, wikipedia FROM movies") do |id, en, wikipedia_link|
