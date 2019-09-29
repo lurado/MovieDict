@@ -69,7 +69,12 @@
                             withString:@"你"
                                options:0
                                  range:NSMakeRange(0, result.length)];
-    
+    // 曲 is usually pronounced qu3, not qu1, in movie titles.
+    [result replaceOccurrencesOfString:@"曲"
+                            withString:@"取"
+                               options:0
+                                 range:NSMakeRange(0, result.length)];
+
     if (CFStringTransform((__bridge CFMutableStringRef)result, NULL,
                           kCFStringTransformMandarinLatin, NO)) {
         return [result copy];
