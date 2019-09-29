@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="H1p-Uh-vWS">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,7 +12,7 @@
             <objects>
                 <navigationController title="Master" id="RMx-3f-FxP" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pmd-2v-anx">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -40,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qgn-rN-tib">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="q7k-5X-byk" id="VOc-Ql-v2E"/>
@@ -48,33 +44,31 @@
                                 </connections>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="f8E-sx-31h">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="CJZ-a5-fJL" id="5kI-Jt-ftZ"/>
                                 </connections>
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Htu-qx-0VJ" customClass="SuggestionsView">
-                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="100" width="375" height="567"/>
                                 <connections>
                                     <outlet property="delegate" destination="CJZ-a5-fJL" id="OaG-vx-ALI"/>
                                 </connections>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="f8E-sx-31h" firstAttribute="top" secondItem="3QT-wT-YIt" secondAttribute="bottom" id="3CA-tw-3Ww"/>
                             <constraint firstItem="Htu-qx-0VJ" firstAttribute="top" secondItem="f8E-sx-31h" secondAttribute="bottom" id="8ln-Ec-1nQ"/>
+                            <constraint firstAttribute="bottom" secondItem="qgn-rN-tib" secondAttribute="bottom" id="HW9-zm-Ks4"/>
                             <constraint firstItem="f8E-sx-31h" firstAttribute="leading" secondItem="oh7-Nb-xiF" secondAttribute="leading" id="HWX-G0-jld"/>
                             <constraint firstItem="qgn-rN-tib" firstAttribute="top" secondItem="f8E-sx-31h" secondAttribute="top" id="N0i-cF-g9S"/>
                             <constraint firstItem="qgn-rN-tib" firstAttribute="leading" secondItem="oh7-Nb-xiF" secondAttribute="leading" id="Qb1-L7-DpZ"/>
                             <constraint firstItem="Htu-qx-0VJ" firstAttribute="leading" secondItem="qgn-rN-tib" secondAttribute="leading" id="QnO-xZ-Pza"/>
-                            <constraint firstItem="5Kn-HF-kjU" firstAttribute="top" secondItem="qgn-rN-tib" secondAttribute="bottom" id="hXA-nO-XJC"/>
+                            <constraint firstItem="5Kn-HF-kjU" firstAttribute="top" secondItem="Htu-qx-0VJ" secondAttribute="bottom" id="XkD-YT-PA5"/>
                             <constraint firstItem="Htu-qx-0VJ" firstAttribute="trailing" secondItem="qgn-rN-tib" secondAttribute="trailing" id="k6L-oA-xk8"/>
                             <constraint firstAttribute="trailing" secondItem="f8E-sx-31h" secondAttribute="trailing" id="mPk-eX-J0e"/>
                             <constraint firstAttribute="trailing" secondItem="qgn-rN-tib" secondAttribute="trailing" id="sey-B1-urV"/>
-                            <constraint firstItem="Htu-qx-0VJ" firstAttribute="bottom" secondItem="qgn-rN-tib" secondAttribute="bottom" id="u2U-JS-41N"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="MovieDict" id="r7e-4j-hFV">
@@ -132,26 +126,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kBX-uQ-Sxe">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="53m-4C-Rov">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <stackView key="tableFooterView" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="-100" id="Civ-iF-XKZ">
-                                    <rect key="frame" x="0.0" y="190" width="375" height="60"/>
+                                    <rect key="frame" x="0.0" y="218" width="375" height="60"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKb-nb-pcR">
-                                            <rect key="frame" x="0.0" y="13.5" width="550" height="33"/>
+                                            <rect key="frame" x="0.0" y="13.5" width="237.5" height="33"/>
                                             <state key="normal" image="IMDb"/>
                                             <connections>
                                                 <action selector="openIMDb:" destination="JEX-9P-axG" eventType="touchUpInside" id="c19-Yk-yXq"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIO-5d-DR0">
-                                            <rect key="frame" x="450" y="13.5" width="550" height="33"/>
+                                            <rect key="frame" x="137.5" y="13.5" width="237.5" height="33"/>
                                             <state key="normal" image="Wikipedia"/>
                                             <connections>
                                                 <action selector="openWikipedia:" destination="JEX-9P-axG" eventType="touchUpInside" id="tUe-oV-h1i"/>
@@ -168,10 +161,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aCl-kD-uXE">
-                                                    <rect key="frame" x="15" y="0.0" width="965" height="80"/>
+                                                    <rect key="frame" x="15" y="0.0" width="340" height="80"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Region" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qH-nC-ufP">
-                                                            <rect key="frame" x="0.0" y="0.0" width="289.5" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="102" height="20.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -181,8 +174,8 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Translation that might be very long and need line-breaks" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4YK-1g-CeM">
-                                                            <rect key="frame" x="309.5" y="0.0" width="608.5" height="0.0"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A translation that might be very long and require line breaks" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4YK-1g-CeM">
+                                                            <rect key="frame" x="122" y="0.0" width="171" height="80"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -193,7 +186,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FgZ-Va-NBw">
-                                                            <rect key="frame" x="938" y="0.0" width="27" height="27"/>
+                                                            <rect key="frame" x="313" y="0.0" width="27" height="27"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="27" id="Cze-dT-mTv"/>
@@ -231,12 +224,11 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="kBX-uQ-Sxe" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="D5T-u3-paO"/>
                             <constraint firstItem="kBX-uQ-Sxe" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="XVc-BP-2G9"/>
+                            <constraint firstAttribute="bottom" secondItem="kBX-uQ-Sxe" secondAttribute="bottom" id="eVn-vv-iZH"/>
                             <constraint firstAttribute="trailing" secondItem="kBX-uQ-Sxe" secondAttribute="trailing" id="k3e-p7-VQs"/>
-                            <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="kBX-uQ-Sxe" secondAttribute="bottom" id="kvm-s8-6rj"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -270,7 +262,7 @@
             <objects>
                 <navigationController id="vC3-pB-5Vb" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="DjV-YW-jjY">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -287,6 +279,6 @@
         <image name="Wikipedia" width="92" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ejp-dR-e5v"/>
+        <segue reference="MCE-5j-X6o"/>
     </inferredMetricsTieBreakers>
 </document>

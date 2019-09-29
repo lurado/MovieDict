@@ -52,7 +52,11 @@ static CGFloat const kSlotHeight = 44;
 
 - (void)setupSuggestionsView
 {
-    self.backgroundColor = [UIColor whiteColor];
+    if (@available(iOS 13, *)) {
+        self.backgroundColor = [UIColor systemBackgroundColor];
+    } else {
+        self.backgroundColor = [UIColor whiteColor];
+    }
     
     self.occupiedSlots = [NSMutableIndexSet new];
     

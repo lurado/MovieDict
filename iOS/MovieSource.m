@@ -209,7 +209,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
                                       reuseIdentifier:identifier];
         cell.textLabel.textColor = cell.detailTextLabel.textColor = [UIColor grayColor];
         cell.textLabel.text = @"Too many results.";
-        cell.detailTextLabel.text = @"Please refine your search terms.";
+        cell.detailTextLabel.text = @"Please be more specific.";
         cell.userInteractionEnabled = NO;
     }
     return cell;
@@ -249,6 +249,7 @@ NSUInteger const kRegionShowMoreLimit = 250;
 - (void)setSearchText:(NSString *)searchText
 {
     if (searchText.length == 0) {
+        self.results = nil;
         self.currentSearchText = nil;
         self.finishedSearchText = nil;
         [self.delegate movieSource:self resultsHaveChanged:NO];
